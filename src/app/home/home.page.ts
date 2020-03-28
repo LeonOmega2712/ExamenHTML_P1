@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import  { Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { usuario } from '../shared/usuario.class';
 
@@ -17,10 +17,11 @@ export class HomePage {
 
   async onIniciar(){
     const user = await this.authSvc.onIniciar(this.user)
-    
     if (user) {
       console.log("Sesion iniciada con exito");
       this.router.navigateByUrl('/frm-main');
+    } else {
+
     }
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { usuario } from '../shared/usuario.class';
-
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -13,7 +12,11 @@ import { AlertController } from '@ionic/angular';
 export class FrmRegistroPage implements OnInit {
   user: usuario = new usuario();
 
-  constructor(private authSvc: AuthService, private router: Router, private alertCon: AlertController) {}
+  constructor(
+    private authSvc: AuthService,
+    private router: Router,
+    private alertCon: AlertController
+  ) {}
 
   ngOnInit() {}
 
@@ -25,7 +28,7 @@ export class FrmRegistroPage implements OnInit {
         const alert = await this.alertCon.create({
           header: 'Alert',
           message: 'Usuario registrado correctamente',
-          buttons:['OK']
+          buttons: ['OK']
         });
 
         await alert.present();
@@ -33,7 +36,15 @@ export class FrmRegistroPage implements OnInit {
         this.router.navigateByUrl('/');
       }
     } catch (e) {
-      console.log('Error al dar de alta usuario', e);
+      const alert = await this.alertCon.create({
+        header: 'Error',
+        message:
+          'Verifique que el correo sea correcto, y que la contraseña cuente con al menos 6 caracteres',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+      // console.log('Error al dar de alta usuario', e);
     }
   }
 }
