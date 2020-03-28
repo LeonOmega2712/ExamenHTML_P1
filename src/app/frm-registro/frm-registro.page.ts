@@ -12,13 +12,10 @@ import { AlertController } from '@ionic/angular';
 export class FrmRegistroPage implements OnInit {
   user: usuario = new usuario();
 
-  constructor(
-    private authSvc: AuthService,
-    private router: Router,
-    private alertCon: AlertController
-  ) {}
+  constructor(private authSvc: AuthService, private router: Router, private alertCon: AlertController) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   async onRegistrar() {
     try {
