@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'frm-main',
     loadChildren: () => import('./frm-main/frm-main.module').then( m => m.FrmMainPageModule)
   },
+  {
+    path: 'frm-main2',
+    loadChildren: () => import('./frm-main2/frm-main2.module').then( m => m.FrmMain2PageModule)
+  },
 ];
 
 @NgModule({

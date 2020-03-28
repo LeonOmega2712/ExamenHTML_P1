@@ -1,9 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>frmMain</ion-title>
+    <ion-title>Primera pestaña</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-button (click) ="onSalir()">Cerrar sesión</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let sonido of sonidos" >
+        <ion-card color="primary" (click)="reproducirSonido(sonido)">
+          <ion-img [src]="sonido.imagen"></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="onSalir()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
