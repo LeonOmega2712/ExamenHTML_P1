@@ -1,20 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      AppSesion
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-item-divider>
+    <ion-label>
+      Bienvenido
+    </ion-label>
+  </ion-item-divider>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-item>
+    <ion-label>
+      Correo
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="user.correo"> </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      Password
+    </ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"> </ion-input>
+  </ion-item>
+
+  <ion-button (click) = "onIniciar()">Entrar</ion-button>
+  <ion-button routerLink="../frm-registro">Registrarse</ion-button>
+
 </ion-content>

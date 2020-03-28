@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>
+      Correo
+    </ion-label>
+    <ion-input type="text" [(ngModel)]="user.correo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      Password
+    </ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+  <ion-item-divider>
+    <ion-button (click)="onRegistrar()">
+      Registrar
+    </ion-button>
+    <ion-button routerLink="/home">Regresar</ion-button>
+  </ion-item-divider>
+</ion-content>
