@@ -47,5 +47,4 @@ export class FrmMainPage implements OnInit {
     sonido.src = s.audio;
     sonido.play();
   }
-
 }

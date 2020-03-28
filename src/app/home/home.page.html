@@ -6,28 +6,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-item-divider>
-    <ion-label>
-      Bienvenido
-    </ion-label>
-  </ion-item-divider>
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <img src="https://image.flaticon.com/icons/svg/2731/2731440.svg" />
+    </ion-item>
 
-  <ion-item>
-    <ion-label>
-      Correo
-    </ion-label>
-    <ion-input type="text" [(ngModel)]="user.correo"> </ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        Correo
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.correo"> </ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>
-      Password
-    </ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"> </ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        Password
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"> </ion-input>
+    </ion-item>
 
-  <ion-button (click) = "onIniciar()">Entrar</ion-button>
-  <ion-button routerLink="../frm-registro">Registrarse</ion-button>
-
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="onIniciar()">Entrar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" routerLink="../frm-registro">
+            Registrarse
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>

@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>frm-main2</ion-title>
+    <ion-title>Segunda pestaña</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let sonido of sonidos">
+        <ion-card color="primary" (click)="reproducirSonido(sonido)">
+          <ion-img [src]="sonido.imagen"></ion-img>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="onSalir()">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" routerLink="../frm-main">
+          <ion-icon name="play-back"></ion-icon>
+           Primera
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" disabled="true">
+          Segunda 
+          <ion-icon name="play-forward-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

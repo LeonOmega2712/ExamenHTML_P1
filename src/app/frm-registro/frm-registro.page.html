@@ -5,24 +5,34 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>
-      Correo
-    </ion-label>
-    <ion-input type="text" [(ngModel)]="user.correo"></ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-item>
+      <img src="https://image.flaticon.com/icons/svg/2731/2731440.svg" />
+    </ion-item>
 
-  <ion-item>
-    <ion-label>
-      Password
-    </ion-label>
-    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        Correo
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="user.correo"></ion-input>
+    </ion-item>
 
-  <ion-item-divider>
-    <ion-button (click)="onRegistrar()">
-      Registrar
-    </ion-button>
-    <ion-button routerLink="/home">Volver</ion-button>
-  </ion-item-divider>
+    <ion-item>
+      <ion-label>
+        Password
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" (click)="onRegistrar()">Registrarse</ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" routerLink="/home">Volver</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
 </ion-content>
