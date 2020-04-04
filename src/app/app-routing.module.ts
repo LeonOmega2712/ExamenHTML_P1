@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../app/guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -9,12 +10,12 @@ const routes: Routes = [
     loadChildren: () => import('./frm-registro/frm-registro.module').then( m => m.FrmRegistroPageModule)
   },
   {
-    path: 'frm-main',
-    loadChildren: () => import('./frm-main/frm-main.module').then( m => m.FrmMainPageModule)
+    path: 'frm-main',                                                     // se agrega el AuthGuard al path de frm-main
+    loadChildren: () => import('./frm-main/frm-main.module').then( m => m.FrmMainPageModule), canActivate: [AuthGuard]
   },
   {
-    path: 'frm-main2',
-    loadChildren: () => import('./frm-main2/frm-main2.module').then( m => m.FrmMain2PageModule)
+    path: 'frm-main2',                                                     // de igual forma a  frm-main2
+    loadChildren: () => import('./frm-main2/frm-main2.module').then( m => m.FrmMain2PageModule), canActivate: [AuthGuard]
   },
 ];
 
