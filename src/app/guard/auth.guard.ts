@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {map} from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
+import { AngularFireAuth } from '@angular/fire/auth'; // se agrega para hacer uso de logueo de firebase
+import {map } from 'rxjs/operators'; // uso de procesos asíncronos y observables
+// ↑↑↑ https://rxjs-dev.firebaseapp.com/guide/operators ↑↑↑
+import { isNullOrUndefined } from 'util'; // para hacer uso de la funcion que menciona...
 import { Router } from '@angular/router'; // se declara el router en los imports
 
 @Injectable({
