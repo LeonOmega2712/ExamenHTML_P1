@@ -19,7 +19,11 @@ const routes: Routes = [
   {
     path: 'frm-main2',                                                    // de igual forma a  frm-main2
     loadChildren: () => import('./frm-main2/frm-main2.module').then( m => m.FrmMain2PageModule), canActivate: [AuthGuard]
+  },  {
+    path: 'tabs-page',
+    loadChildren: () => import('./tabs-page/tabs-page.module').then( m => m.TabsPagePageModule)
   },
+
 ];
 
 @NgModule({
