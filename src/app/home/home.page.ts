@@ -20,7 +20,7 @@ export class HomePage {
       const user = await this.authSvc.onIniciar(this.user);
       if (user) {
         console.log('Sesion iniciada con exito');
-        this.router.navigateByUrl('/frm-main');
+        this.router.navigateByUrl('/tabs-page/frm-main');
       }
     } catch (e) {
       const alert = await this.alertCon.create({
