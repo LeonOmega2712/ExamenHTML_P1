@@ -12,7 +12,7 @@ export class FrmMain2Page implements OnInit {
     {
       nombre: 'Coin',
       audio: 'assets/sounds/COIN.mp3',
-      imagen: 'https://lh3.googleusercontent.com/proxy/L78UqfGleDpc5BAEHvnU9WDEsKVxHOEEM3ng5Nlepy0qQWex7aAazUlR9sIID7-brUj6jHHn5w7D5WaV56k'
+      imagen: 'https://lh3.googleusercontent.com/proxy/Ptbe9klbkshpCdNtYxtWyjBXmrrOKrBke_ZMOJOKtgIFXd4gt2dQnb30CCTj08DMEjF4H8j3rX4_voYNZXI'
     },
     {
       nombre: 'HMG',
