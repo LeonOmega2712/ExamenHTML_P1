@@ -16,17 +16,23 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed"> <!--FAB DE MENÚ-->
     <ion-fab-button color="light">
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <ion-fab-button color="success">
+
+      <!--FAB DE PERFIL-->
+      <ion-fab-button color="success" (click)="abrirPerfil()">
         <ion-icon name="person-outline"></ion-icon>
       </ion-fab-button>
+
+      <!--FAB DE AGREGAR NUEVO ITEM-->
       <ion-fab-button color="warning">
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
+
+      <!--FAB DE LOG-OUT-->
       <ion-fab-button color="danger" (click)="onSalir()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-fab-button>
