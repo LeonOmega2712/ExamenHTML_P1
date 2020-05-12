@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Datos de perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Su perfil:</ion-card-title>
+      <ion-card-subtitle>Edite o agregue datos de su perfil</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header>
+          Nombre y apellido
+        </ion-list-header>
+        <ion-item>
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-input placeholder="Nombre"></ion-input>
+          <ion-input placeholder="Apellido"></ion-input>
+        </ion-item>
+
+        <ion-radio-group value="hombre">
+          <ion-list-header>
+            <ion-label>Sexo</ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-icon name="male-outline"></ion-icon>
+            <ion-label>Hombre</ion-label>
+            <ion-radio slot="end" value="hombre"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="female-outline"></ion-icon>
+            <ion-label>Mujer</ion-label>
+            <ion-radio slot="end" value="mujer"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+        <ion-list-header>Correo</ion-list-header>
+        <ion-item disabled="true">
+          <ion-icon name="mail-outline"></ion-icon>
+          <ion-label>Correo</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="9">
+              <ion-button expand="block">Guardar</ion-button>
+            </ion-col>
+            <ion-col size="3">
+              <ion-button expand="block" color="danger">
+                <ion-icon name="arrow-back-circle-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+  </ion-card>
+</ion-content>
