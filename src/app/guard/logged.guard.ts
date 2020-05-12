@@ -21,7 +21,7 @@ export class LoggedGuard implements CanActivate {
      return this.afAuth.authState.pipe(map(
         auth => {
           if(auth){ // si está autenticado ...
-            this.router.navigateByUrl('/frm-main'); // redirigelo de vuelta a frm-main
+            this.router.navigateByUrl('/tabs-page/frm-main'); // redirigelo de vuelta a frm-main
             return false;
           } else { // si no está autenticado...
             return true; // déjalo salir a home
@@ -29,5 +29,4 @@ export class LoggedGuard implements CanActivate {
         }
       ));
   }
-  
 }

@@ -49,4 +49,8 @@ export class FrmMain2Page implements OnInit {
   abrirPerfil() {
     this.router.navigateByUrl('/user-profile');
   }
+
+  editarCarta() {
+    this.router.navigateByUrl('/card-editor');
+  }
 }

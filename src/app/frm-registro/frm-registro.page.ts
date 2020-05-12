@@ -23,7 +23,7 @@ export class FrmRegistroPage implements OnInit {
 
       if (user) {
         const alert = await this.alertCon.create({
-          header: 'Alert',
+          header: 'Aviso',
           message: 'Usuario registrado correctamente',
           buttons: ['OK']
         });

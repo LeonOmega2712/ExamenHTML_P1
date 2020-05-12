@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'user-profile',
     loadChildren: () => import('./user-profile/user-profile.module').then( m => m.UserProfilePageModule)
   },
+  {
+    path: 'card-editor',
+    loadChildren: () => import('./card-editor/card-editor.module').then( m => m.CardEditorPageModule)
+  },
 
 ];
 
