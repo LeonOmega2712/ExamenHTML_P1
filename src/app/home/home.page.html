@@ -1,11 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      AppSesion
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-card>
     <img
@@ -17,31 +9,42 @@
       <ion-card-subtitle>Inicie sesión para continuar</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-item>
-      <ion-label>
-        Correo
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.correo"> </ion-input>
-    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-label> </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="user.correo"
+          placeholder="Correo"
+        ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>
-        Password
-      </ion-label>
-      <ion-input type="password" [(ngModel)]="user.password"> </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-icon name="finger-print-outline"></ion-icon>
+        <ion-label> </ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="user.password"
+          placeholder="Contraseña"
+        ></ion-input>
+      </ion-item>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" (click)="onIniciar()">Entrar</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button expand="block" routerLink="../frm-registro">
-            Registrarse
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      <ion-button expand="block" (click)="onIniciar()"
+        >Iniciar sesión</ion-button
+      >
+    </ion-card-content>
+    <ion-item lines="none">
+      ¿No tiene cuenta?
+      <ion-button
+        slot="end"
+        expand="block"
+        fill="clear"
+        size="medium"
+        routerLink="../frm-registro"
+      >
+        Registrarse aquí
+      </ion-button>
+    </ion-item>
   </ion-card>
 </ion-content>
