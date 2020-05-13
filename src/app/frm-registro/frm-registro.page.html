@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Registro</ion-title>
+    <ion-buttons>
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,32 +14,36 @@
     />
 
     <ion-card-header>
-      <ion-card-title>Metal Slug mini-wiki</ion-card-title>
-      <ion-card-subtitle>Registrarse</ion-card-subtitle>
+      <ion-card-title>Registrar nueva cuenta</ion-card-title>
+      <ion-card-subtitle
+        >Acceda a la mini-wiki creando su cuenta</ion-card-subtitle
+      >
     </ion-card-header>
-    <ion-item>
-      <ion-label>
-        Correo
-      </ion-label>
-      <ion-input type="text" [(ngModel)]="user.correo"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label>
-        Password
-      </ion-label>
-      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-    </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-label> </ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="user.correo"
+          placeholder="Correo"
+        ></ion-input>
+      </ion-item>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" (click)="onRegistrar()">Registrarse</ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="block" routerLink="/home">Volver</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      <ion-item>
+        <ion-icon name="finger-print-outline"></ion-icon>
+        <ion-label> </ion-label>
+        <ion-input
+          type="password"
+          [(ngModel)]="user.password"
+          placeholder="Contraseña"
+        ></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="onRegistrar()"
+        >Registrarse</ion-button
+      >
+    </ion-card-content>
   </ion-card>
 </ion-content>
