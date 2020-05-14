@@ -21,11 +21,11 @@
         </ion-list-header>
         <ion-item>
           <ion-icon name="person-outline"></ion-icon>
-          <ion-input placeholder="Nombre"></ion-input>
-          <ion-input placeholder="Apellido"></ion-input>
+          <ion-input placeholder="Nombre" [(ngModel)]="user.nombre"></ion-input>
+          <ion-input placeholder="Apellido" [(ngModel)]="user.apellido"></ion-input>
         </ion-item>
 
-        <ion-radio-group value="hombre">
+        <ion-radio-group value="user.sexo">
           <ion-list-header>
             <ion-label>Sexo</ion-label>
           </ion-list-header>
@@ -46,10 +46,10 @@
         <ion-list-header>Correo</ion-list-header>
         <ion-item disabled="true">
           <ion-icon name="mail-outline"></ion-icon>
-          <ion-label>Correo</ion-label>
+          <ion-label>{{user.correo}}</ion-label>
         </ion-item>
       </ion-list>
-      <ion-button expand="block">Guardar</ion-button>
+      <ion-button expand="block" (click)="GuardarUsuario()">Guardar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

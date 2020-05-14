@@ -19,6 +19,7 @@ export class HomePage {
       const user = await this.authSvc.onIniciar(this.user);
       if (user) {
         localStorage.setItem('uid', JSON.stringify(user.user.uid));
+        localStorage.setItem('correo', JSON.stringify(user.user.email));
         this.router.navigateByUrl('/tabs-page/frm-main');
       }
     } catch (e) {

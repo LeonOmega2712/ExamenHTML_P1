@@ -29,6 +29,7 @@ export class FrmRegistroPage implements OnInit {
         });
         await alert.present();
         localStorage.setItem('uid', JSON.stringify(user.user.uid));
+        localStorage.setItem('correo', JSON.stringify(user.user.email));
         console.log(localStorage.getItem('uid'));
         this.router.navigateByUrl('/');
       }
