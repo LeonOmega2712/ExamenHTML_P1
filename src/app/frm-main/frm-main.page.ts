@@ -80,10 +80,6 @@ export class FrmMainPage implements OnInit {
     this.router.navigateByUrl('/user-profile');
   }
 
-  editarCarta() {
-    this.router.navigateByUrl('/card-editor');
-  }
-
   // BORRAR UN ELEMENTO DE FIREBASE
   borrarRegistro(obj) {
     this.fireSvc.borrarDeFirebase(obj, 'primeraColeccion');
