@@ -12,8 +12,8 @@
         <ion-card color="primary" (click)="reproducirSonido(col)" (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)" >
           <ion-img [src]="col.foto"></ion-img>
 
-          <ion-button *ngIf="col.oculto" >abr</ion-button>
-          <ion-button *ngIf="col.oculto" >abr</ion-button>
+          <ion-button *ngIf="col.oculto" (click)="borrarRegistro(col)">Borrar</ion-button>
+          <ion-button *ngIf="col.oculto" [routerLink]="['/card-editor/coleccionUno/'+col.uid]">Editar</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

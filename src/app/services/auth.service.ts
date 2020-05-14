@@ -63,6 +63,6 @@ export class AuthService {
   }
 
   borrarDeFirebase(obj, coleccion) {
-
+    // SACATE A LA BERGA REGISTRO COCHINO
   }
 }
