@@ -36,7 +36,7 @@ export class FrmMainPage implements OnInit {
 
   // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
   cargarColeccion() {
-    this.fireSvc.getTodoCollection('primeraColeccion').subscribe((data) => {
+    this.fireSvc.getTodoCollection('coleccionUno').subscribe((data) => {
       this.coleccionUno = data.map((e) => {
         return {
           uid: e.payload.doc.id,
@@ -82,7 +82,7 @@ export class FrmMainPage implements OnInit {
 
   // BORRAR UN ELEMENTO DE FIREBASE
   borrarRegistro(obj) {
-    this.fireSvc.borrarDeFirebase(obj, 'primeraColeccion');
+    this.fireSvc.borrarDeFirebase(obj, 'coleccionUno');
   }
 
 }

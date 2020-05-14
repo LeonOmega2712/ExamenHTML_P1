@@ -9,6 +9,7 @@
 
 <ion-content>
   <ion-card>
+    <img src="{{fotoLink}}" alt="">
     <ion-card-header>
       <ion-card-subtitle>Personalice su carta</ion-card-subtitle>
       <ion-card-title>Ingrese los parámetros</ion-card-title>
@@ -16,6 +17,13 @@
 
     <ion-card-content>
       <ion-list>
+        <ion-list-header>
+          <ion-label>Nombre</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-input [ngModel]="nombreCarta"></ion-input>
+        </ion-item>
+
         <ion-list-header>
           <ion-label>Categoría</ion-label>
         </ion-list-header>
@@ -31,7 +39,7 @@
             <ion-radio slot="end" value="escenarios"></ion-radio>
           </ion-item>
         </ion-radio-group>
-      
+
         <ion-list-header>Imágen</ion-list-header>
         <ion-item>
           <ion-input type="file"></ion-input>
@@ -41,7 +49,6 @@
         <ion-item>
           <ion-input type="file"></ion-input>
         </ion-item>
-
       </ion-list>
     </ion-card-content>
   </ion-card>

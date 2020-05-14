@@ -10,6 +10,8 @@ import { AuthService } from '../services/auth.service';
 export class CardEditorPage implements OnInit {
   coleccion: any;
   titulo = 'Modificar';
+  nombreCarta;
+  fotoLink;
   constructor(private router: Router, private actRoute: ActivatedRoute, private authSvc: AuthService) { }
 
   ngOnInit() {
@@ -17,7 +19,14 @@ export class CardEditorPage implements OnInit {
     let id = this.actRoute.snapshot.paramMap.get('id');
 
     if (id === 'Agregar') {
+      // ESTO SE EJECUTA CUANDO ENTRAMOS A TRAVÉS DEL FAB
       this.titulo = id;
+    } else {
+      // ESTO SE EJECUTA CUANDO ENTRAMOS A TRAVÉS DE EDITAR
+      this.authSvc.getComodin(id, this.coleccion).subscribe((data) => {
+        this.nombreCarta = data.payload.data()['nombre'];
+        this.fotoLink = data.payload.data()['fotoLink'];
+      });
     }
 
   }
