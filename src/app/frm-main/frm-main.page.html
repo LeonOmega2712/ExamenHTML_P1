@@ -11,6 +11,11 @@
       <ion-col size="6" *ngFor="let col of coleccionUno">
         <ion-card color="primary" (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)" >
           <ion-img [src]="col.foto"></ion-img>
+          <ion-card-header style="text-align: center;"> 
+            <ion-card-subtitle>
+              {{col.nombre}}
+            </ion-card-subtitle>
+          </ion-card-header>
           <ion-button *ngIf="col.oculto" expand="block" (click)="reproducirSonido(col)">
             <ion-icon name="musical-notes-outline" style="margin-right: 3px;"></ion-icon>
             Reproducir

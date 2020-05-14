@@ -12,23 +12,25 @@ export class CardEditorPage implements OnInit {
   titulo = 'Modificar';
   nombreCarta;
   fotoLink;
-
   fotoFile;
   audioFile;
+  idCarta;
 
+  nombreCartaViejo;
   constructor(private router: Router, private actRoute: ActivatedRoute, private authSvc: AuthService) {}
 
   ngOnInit() {
     this.coleccion = this.actRoute.snapshot.paramMap.get('col');
-    let id = this.actRoute.snapshot.paramMap.get('id');
+    this.idCarta = this.actRoute.snapshot.paramMap.get('id');
 
-    if (id === 'Agregar') {
+    if (this.idCarta === 'Agregar') {
       // ESTO SE EJECUTA CUANDO ENTRAMOS A TRAVÉS DEL FAB
-      this.titulo = id;
+      this.titulo = this.idCarta;
     } else {
       // ESTO SE EJECUTA CUANDO ENTRAMOS A TRAVÉS DE EDITAR
-      this.authSvc.getComodin(id, this.coleccion).subscribe((data) => {
+      this.authSvc.getComodin(this.idCarta, this.coleccion).subscribe((data) => {
         this.nombreCarta = data.payload.data()['nombre'];
+        this.nombreCartaViejo = this.nombreCarta;
         this.fotoLink = data.payload.data()['fotoLink'];
       });
     }
@@ -47,6 +49,12 @@ export class CardEditorPage implements OnInit {
   }
 
   async wardiola() {
+    let datoGato  = [];
+    datoGato['uid'] = this.idCarta;
+    datoGato['nombre'] = this.nombreCartaViejo;
+    if (this.idCarta !== 'Agregar') {
+      this.authSvc.borrarDeFirebase(datoGato, this.coleccion);
+    }
     let urlimagen;
     console.log(this.nombreCarta);
     let subirIm = this.authSvc.subirFotoEnFirebase(this.coleccion, this.fotoFile, this.nombreCarta);
@@ -61,5 +69,6 @@ export class CardEditorPage implements OnInit {
         this.authSvc.storeMetaInfoIm(res.metadata, urlimagen, url, this.coleccion).then(() => {});
       });
     });
+    this.router.navigateByUrl('tabs-page/frm-main');
   }
 }
