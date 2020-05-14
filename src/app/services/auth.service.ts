@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore/';
 import { usuario } from '../shared/usuario.class';
+import { AngularFireUploadTask, AngularFireStorage} from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { usuario } from '../shared/usuario.class';
 export class AuthService {
   public isLogged: any = false;
   public alertW: AlertController;
-  constructor(public afAuth: AngularFireAuth, public afStore: AngularFirestore) {
+  constructor(public afAuth: AngularFireAuth, public afStore: AngularFirestore, public fireStorage: AngularFireStorage) {
     afAuth.authState.subscribe(usuario => (this.isLogged = usuario));
   }
 
@@ -65,4 +66,22 @@ export class AuthService {
   borrarDeFirebase(obj, coleccion) {
     // SACATE A LA BERGA REGISTRO COCHINO
   }
+
+  subirFotoEnFirebase(path, information, name): AngularFireUploadTask{
+    return this.fireStorage.ref('/' + path +  '/img/' + name).put(information);
+  }
+
+  subirAudioEnFirebase(path, information, name): AngularFireUploadTask{
+    return this.fireStorage.ref('/' + path +  '/sound/' + name).put(information);
+  }
+  storeMetaInfoIm(metainfo,urlim,urlsound, tipo){
+    let toSave= {
+      fotoLink: urlim,
+      audioLink: urlsound,
+      nombre: metainfo.name
+    }
+    return this.afStore.collection(tipo).add(toSave);
+  }
+
+
 }

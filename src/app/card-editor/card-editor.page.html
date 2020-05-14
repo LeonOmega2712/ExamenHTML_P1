@@ -42,14 +42,16 @@
 
         <ion-list-header>Imágen</ion-list-header>
         <ion-item>
-          <ion-input type="file"></ion-input>
+          <ion-input (change)="cargarFoto($event)" type="file" accept="image/*"></ion-input>
         </ion-item>
 
         <ion-list-header>Sonido</ion-list-header>
         <ion-item>
-          <ion-input type="file"></ion-input>
+          <ion-input (change)="cargarAudio($event)" type="file" accept="audio/*"></ion-input>
         </ion-item>
       </ion-list>
+
+      <ion-button (click)="wardiola()"></ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
