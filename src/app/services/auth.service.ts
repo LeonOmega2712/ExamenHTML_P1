@@ -68,6 +68,7 @@ export class AuthService {
   }
 
   subirFotoEnFirebase(path, information, name): AngularFireUploadTask{
+    console.log('funcion del servicio: ' + path + '---' + information + '---' + name);
     return this.fireStorage.ref('/' + path +  '/img/' + name).put(information);
   }
 

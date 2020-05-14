@@ -21,24 +21,8 @@
           <ion-label>Nombre</ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-input [ngModel]="nombreCarta"></ion-input>
+          <ion-input [(ngModel)]="nombreCarta"></ion-input>
         </ion-item>
-
-        <ion-list-header>
-          <ion-label>Categoría</ion-label>
-        </ion-list-header>
-
-        <ion-radio-group value="personajes">
-          <ion-item>
-            <ion-label>Personajes</ion-label>
-            <ion-radio slot="end" value="personajes"></ion-radio>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Escenarios</ion-label>
-            <ion-radio slot="end" value="escenarios"></ion-radio>
-          </ion-item>
-        </ion-radio-group>
 
         <ion-list-header>Imágen</ion-list-header>
         <ion-item>
@@ -51,7 +35,7 @@
         </ion-item>
       </ion-list>
 
-      <ion-button (click)="wardiola()"></ion-button>
+      <ion-button (click)="wardiola()">Guardar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
