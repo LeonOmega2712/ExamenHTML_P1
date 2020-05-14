@@ -19,8 +19,7 @@ export class UserProfilePage implements OnInit {
     this.user.uid = localStorage.getItem('uid');
     this.user.uid = this.user.uid.replace('"', '');
     this.user.uid = this.user.uid.replace('"', '');
-
-    this.authSvc.getComodin('usuarios', this.user.uid).subscribe((data) => {
+    this.authSvc.getComodin(this.user.uid, 'usuarios').subscribe((data) => {
       if (data.payload.get('nombre') !== undefined) {
         this.user.nombre = data.payload.data()['nombre'];
         this.user.apellido = data.payload.data()['apellido'];
@@ -30,8 +29,7 @@ export class UserProfilePage implements OnInit {
       this.user.correo = this.user.correo.replace('"', '');
       this.user.correo = this.user.correo.replace('"', '');
     });
-
-
+    console.log(this.user.nombre + ' ' + this.user.apellido + ' ' + this.user.sexo + ' ');
   }
 
   GuardarUsuario() {
@@ -49,6 +47,6 @@ export class UserProfilePage implements OnInit {
   }
   sexoChanged(event) {
     this.user.sexo = event.detail.value;
-    console.log('Sexo: ' + this.user.sexo);
+    console.log(this.user.nombre + ' ' + this.user.apellido + ' ' + this.user.sexo + ' ');
   }
 }

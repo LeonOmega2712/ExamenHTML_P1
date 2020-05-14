@@ -66,8 +66,9 @@ export class FrmMainPage implements OnInit {
 
   onSalir() {
     this.afAuth.auth.signOut();
-    console.log('Se ha cerrado sesión');
     this.router.navigateByUrl('/home');
+    localStorage.removeItem('uid');
+    localStorage.removeItem('correo');
   }
 
   reproducirSonido(s) {
