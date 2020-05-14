@@ -10,24 +10,22 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   user: usuario = new usuario();
 
-  constructor(private authSvc: AuthService, private router: Router, private alertCon: AlertController) { }
+  constructor(private authSvc: AuthService, private router: Router, private alertCon: AlertController) {}
 
   async onIniciar() {
     try {
       const user = await this.authSvc.onIniciar(this.user);
       if (user) {
-        console.log('Sesion iniciada con exito');
+        localStorage.setItem('uid', JSON.stringify(user.user.uid));
         this.router.navigateByUrl('/tabs-page/frm-main');
       }
     } catch (e) {
       const alert = await this.alertCon.create({
         header: 'Error',
-        message:
-          'Verifique su correo y contraseña',
-        buttons: ['OK']
+        message: 'Verifique su correo y contraseña',
+        buttons: ['OK'],
       });
 
       await alert.present();

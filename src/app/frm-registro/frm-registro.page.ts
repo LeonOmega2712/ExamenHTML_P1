@@ -27,9 +27,9 @@ export class FrmRegistroPage implements OnInit {
           message: 'Usuario registrado correctamente',
           buttons: ['OK']
         });
-
         await alert.present();
-
+        localStorage.setItem('uid', JSON.stringify(user.user.uid));
+        console.log(localStorage.getItem('uid'));
         this.router.navigateByUrl('/');
       }
     } catch (e) {
