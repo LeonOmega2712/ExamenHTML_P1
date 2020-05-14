@@ -20,6 +20,10 @@ export class AuthService {
     return this.afStore.collection(coleccion).doc(id).snapshotChanges();
   }
 
+  actualizarUsuario(uid, data, coleccion) {
+    return this.afStore.collection(coleccion).doc(uid).set(data);
+  }
+
   getTodoCollection(coleccion) {
     return this.afStore.collection(coleccion).snapshotChanges();
   }

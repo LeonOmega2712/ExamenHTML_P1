@@ -25,7 +25,7 @@
           <ion-input placeholder="Apellido" [(ngModel)]="user.apellido"></ion-input>
         </ion-item>
 
-        <ion-radio-group value="user.sexo">
+        <ion-radio-group value="user.sexo" (ionChange)="sexoChanged($event)">
           <ion-list-header>
             <ion-label>Sexo</ion-label>
           </ion-list-header>
@@ -33,13 +33,13 @@
           <ion-item>
             <ion-icon name="male-outline"></ion-icon>
             <ion-label>Hombre</ion-label>
-            <ion-radio slot="end" value="hombre"></ion-radio>
+            <ion-radio slot="end" value="Hombre"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-icon name="female-outline"></ion-icon>
             <ion-label>Mujer</ion-label>
-            <ion-radio slot="end" value="mujer"></ion-radio>
+            <ion-radio slot="end" value="Mujer"></ion-radio>
           </ion-item>
         </ion-radio-group>
 

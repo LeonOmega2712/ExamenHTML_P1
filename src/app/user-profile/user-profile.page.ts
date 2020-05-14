@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { usuario } from '../shared/usuario.class';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class UserProfilePage implements OnInit {
   user: usuario = new usuario();
 
-  constructor(private authSvc: AuthService) { }
+  constructor(private authSvc: AuthService, private router: Router) { }
 
   ngOnInit() {
 
@@ -34,6 +35,20 @@ export class UserProfilePage implements OnInit {
   }
 
   GuardarUsuario() {
+    let usuario = {};
+    usuario['nombre'] = this.user.nombre;
+    usuario['apellido'] = this.user.apellido;
+    usuario['sexo'] = this.user.sexo;
 
+    try {
+      this.authSvc.actualizarUsuario(this.user.uid, usuario, 'usuarios');
+      this.router.navigateByUrl('tabs-page/frm-main');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  sexoChanged(event) {
+    this.user.sexo = event.detail.value;
+    console.log('Sexo: ' + this.user.sexo);
   }
 }
