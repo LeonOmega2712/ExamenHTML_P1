@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Bienvenido ------</ion-title>
+    <ion-title>Bienvenido {{u.nombre}}</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -8,9 +8,12 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let sonido of sonidos">
-        <ion-card color="primary" (click)="reproducirSonido(sonido)">
-          <ion-img [src]="sonido.imagen"></ion-img>
+      <ion-col size="6" *ngFor="let col of coleccionUno">
+        <ion-card color="primary" (click)="reproducirSonido(col)" (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)" >
+          <ion-img [src]="col.foto"></ion-img>
+
+          <ion-button *ngIf="col.oculto" >abr</ion-button>
+          <ion-button *ngIf="col.oculto" >abr</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

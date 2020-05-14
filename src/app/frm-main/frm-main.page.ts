@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import { AuthService } from '../services/auth.service';
+import { usuario } from '../shared/usuario.class';
 
 @Component({
   selector: 'app-frm-main',
@@ -9,33 +10,60 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./frm-main.page.scss'],
 })
 export class FrmMainPage implements OnInit {
+  uid;
+  u: usuario = new usuario();
 
-  sonidos = [
-    {
-      nombre: 'Gong',
-      audio: 'assets/sounds/Gong.wav',
-      imagen: 'https://img.icons8.com/ios/100/000000/gong.png'
-    },
-    {
-      nombre: 'Redoble',
-      audio: 'assets/sounds/Redoble.wav',
-      imagen: 'https://img.icons8.com/ios/100/000000/snare-drum.png'
-    },
-    {
-      nombre: 'TrompetaEntrada',
-      audio: 'assets/sounds/TrompetaEntrada.wav',
-      imagen: 'https://img.icons8.com/ios/100/000000/trumpet.png'
-    },
-    {
-      nombre: 'TrompetaSalida',
-      audio: 'assets/sounds/TrompetaSalida.wav',
-      imagen: 'https://img.icons8.com/ios/100/000000/herald-trumpet.png'
-    }
-  ];
+  coleccionUno = [];
 
-  constructor(private router: Router, private afAuth: AngularFireAuth) { }
+  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService) {}
+
   ngOnInit() {
+    // CONSEGUIR EL UID DEL USUARIO Y QUITARLE LAS COMILLAS DE JSON.STRINGIFY
+    this.uid = localStorage.getItem('uid');
+    this.uid = this.uid.replace('"', '');
+    this.uid = this.uid.replace('"', '');
+
+    // COMRPOBAR EN FIREBASE SI EL USUARIO ACTUAL TIENE NOMBRE RESGITRADO
+    this.fireSvc.getComodin(this.uid, 'usuarios').subscribe((result) => {
+      if (result.payload.get('nombre') !== undefined) {
+        this.u.nombre = result.payload.data()['nombre'];
+      } else {
+        this.u.nombre = '----------';
+      }
+      this.cargarColeccion();
+    });
   }
+
+  // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
+  cargarColeccion() {
+    this.fireSvc.getTodoCollection('primeraColeccion').subscribe((data) => {
+      this.coleccionUno = data.map((e) => {
+        return {
+          uid: e.payload.doc.id,
+          nombre: e.payload.doc.data()['nombre'],
+          foto: e.payload.doc.data()['fotoLink'],
+          audio: e.payload.doc.data()['audioLink'],
+        };
+      });
+    });
+  }
+
+  mouseArriba(obj) {
+    this.coleccionUno.map(function(dato){
+      if(dato === obj){
+        dato.oculto = true;
+      }
+    });
+  }
+
+  mouseAfuera(obj) {
+    this.coleccionUno.map(function(dato){
+      if(dato === obj){
+        dato.oculto = false;
+      }
+    });
+  }
+
   onSalir() {
     this.afAuth.auth.signOut();
     console.log('Se ha cerrado sesión');
@@ -55,4 +83,10 @@ export class FrmMainPage implements OnInit {
   editarCarta() {
     this.router.navigateByUrl('/card-editor');
   }
+
+  // BORRAR UN ELEMENTO DE FIREBASE
+  borrarRegistro(obj) {
+    this.fireSvc.borrarDeFirebase(obj, 'primeraColeccion');
+  }
+
 }

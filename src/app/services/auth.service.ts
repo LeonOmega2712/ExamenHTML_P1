@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore/';
 import { usuario } from '../shared/usuario.class';
 
 @Injectable({
@@ -9,8 +10,17 @@ import { usuario } from '../shared/usuario.class';
 export class AuthService {
   public isLogged: any = false;
   public alertW: AlertController;
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth, public afStore: AngularFirestore) {
     afAuth.authState.subscribe(usuario => (this.isLogged = usuario));
+  }
+
+  // TRAER UN REGISTRO DE UNA COLECCIÓN USANDO UN UID
+  getComodin(id, coleccion) {
+    return this.afStore.collection(coleccion).doc(id).snapshotChanges();
+  }
+
+  getTodoCollection(coleccion) {
+    return this.afStore.collection(coleccion).snapshotChanges();
   }
 
   async onRegistrar(usuario: usuario) {
@@ -50,5 +60,9 @@ export class AuthService {
 
       // console.log('No se logró iniciar sesión', e);
     }
+  }
+
+  borrarDeFirebase(obj, coleccion) {
+
   }
 }
