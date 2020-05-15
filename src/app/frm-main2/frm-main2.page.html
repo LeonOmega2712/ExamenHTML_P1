@@ -1,21 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Bienvenido ------</ion-title>
+    <ion-title>Bienvenido {{u.nombre}}</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="6" *ngFor="let sonido of sonidos">
-        <ion-card color="primary" (click)="reproducirSonido(sonido)">
-          <ion-img [src]="sonido.imagen"></ion-img>
+      <ion-col size="6" *ngFor="let col of coleccionDos">
+        <ion-card color="primary" (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)" >
+          <ion-img [src]="col.foto"></ion-img>
+          <ion-card-header style="text-align: center;"> 
+            <ion-card-subtitle>
+              {{col.nombre}}
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-button *ngIf="col.oculto" expand="block" (click)="reproducirSonido(col)">
+            <ion-icon name="musical-notes-outline" style="margin-right: 3px;"></ion-icon>
+            Reproducir
+          </ion-button>
+          <ion-button *ngIf="col.oculto" expand="block" [routerLink]="['/card-editor/coleccionDos/'+col.uid]">Editar</ion-button>
+          <ion-button *ngIf="col.oculto" expand="block" (click)="borrarRegistro(col)">Borrar</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed"> <!--FAB DE MENÚ-->
+  <!--FAB DE MENÚ-->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed"> 
     <ion-fab-button color="light">
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
@@ -27,7 +40,7 @@
       </ion-fab-button>
 
       <!--FAB DE EDITAR ITEM-->
-      <ion-fab-button color="warning" (click)="editarCarta()">
+      <ion-fab-button color="warning" [routerLink]="['/card-editor/coleccionDos/Agregar']">
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
 
@@ -37,4 +50,5 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
+
 </ion-content>
