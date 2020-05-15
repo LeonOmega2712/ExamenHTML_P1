@@ -47,6 +47,5 @@ export class UserProfilePage implements OnInit {
   }
   sexoChanged(event) {
     this.user.sexo = event.detail.value;
-    console.log(this.user.nombre + ' ' + this.user.apellido + ' ' + this.user.sexo + ' ');
   }
 }
