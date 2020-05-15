@@ -20,10 +20,12 @@ export class AuthService {
     return this.afStore.collection(coleccion).doc(id).snapshotChanges();
   }
 
+  // HACER  UN UPDATE DE UN USUARIO, PUEDE USARSE PARA OTRA COLECCIÓN
   actualizarUsuario(uid, data, coleccion) {
     return this.afStore.collection(coleccion).doc(uid).set(data);
   }
 
+  // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN DE FIREBASE, PUEDE USARSE PARA DISTINTAS COLECCIONES
   getTodoCollection(coleccion) {
     return this.afStore.collection(coleccion).snapshotChanges();
   }
@@ -39,8 +41,6 @@ export class AuthService {
       });
 
       await alert.present();
-
-      // console.log('Ocurrió un error al registrarse', e);
     }
   }
 
@@ -55,8 +55,6 @@ export class AuthService {
       });
 
       await alert.present();
-
-      // console.log('No se logró iniciar sesión', e);
     }
   }
 
@@ -67,14 +65,17 @@ export class AuthService {
     this.fireStorage.ref(coleccion + '/sound/' + obj.nombre).delete();
   }
 
+  // SUBIR ARCHIVO DE FOTO A FIREBASE
   subirFotoEnFirebase(path, information, name): AngularFireUploadTask {
-    console.log('funcion del servicio: ' + path + '---' + information + '---' + name);
     return this.fireStorage.ref('/' + path + '/img/' + name).put(information);
   }
 
+  // SUBIR ARCHIVO DE AUDIO A FIREBASE
   subirAudioEnFirebase(path, information, name): AngularFireUploadTask {
     return this.fireStorage.ref('/' + path + '/sound/' + name).put(information);
   }
+  
+  // ENLAZAR UN AUDIO Y FOTO EN UN REGISTRO DE FIREBASE
   storeMetaInfoIm(metainfo, urlim, urlsound, tipo) {
     let toSave = {
       fotoLink: urlim,

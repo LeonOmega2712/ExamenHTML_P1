@@ -19,6 +19,7 @@ export class UserProfilePage implements OnInit {
     this.user.uid = localStorage.getItem('uid');
     this.user.uid = this.user.uid.replace('"', '');
     this.user.uid = this.user.uid.replace('"', '');
+    
     this.authSvc.getComodin(this.user.uid, 'usuarios').subscribe((data) => {
       if (data.payload.get('nombre') !== undefined) {
         this.user.nombre = data.payload.data()['nombre'];
