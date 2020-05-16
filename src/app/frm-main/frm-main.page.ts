@@ -14,6 +14,7 @@ export class FrmMainPage implements OnInit {
   globalazo = [];
   paises = [];
   quedateQuieto = [];
+  actualizado;
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private jsonProvider: JsonService) {}
 
@@ -28,6 +29,7 @@ export class FrmMainPage implements OnInit {
       (data) => {
         // TRAER TODOS LOS DATOS DE LA API/SUMMARY
         this.datos = data;
+        this.actualizado = data['Date'];
         this.paises.push(data['Global']);
         this.paises[0]['Country']= 'Global';
         // SEPARAR LOS DATOS DE CADA PAIS EN LA LISTA PAISES

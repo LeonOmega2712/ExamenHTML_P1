@@ -14,7 +14,7 @@
         <h4>
           <ion-select value="Global" cancelText="Cancelar" interface="action-sheet" (ionChange)="verEstadisticas($event)" placeholder="Global">
             <!-- AQUÍ SE LLENA DE FORMA DINÁMICA POR CADA PAÍS-->
-            <ion-select-option *ngFor="let pais of paises" >
+            <ion-select-option *ngFor="let pais of paises">
               {{pais.Country}}
             </ion-select-option>
           </ion-select>
@@ -95,6 +95,10 @@
         </ion-item>
       </ion-list-header>
     </ion-list>
+
+    <ion-item style="text-align: center;">
+      <ion-label style="font-size: small;">Última actualización: {{actualizado}}</ion-label>
+    </ion-item>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
