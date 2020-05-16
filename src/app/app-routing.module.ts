@@ -16,10 +16,6 @@ const routes: Routes = [
     path: 'frm-main',                                                     // se agrega el AuthGuard al path de frm-main
     loadChildren: () => import('./frm-main/frm-main.module').then( m => m.FrmMainPageModule), canActivate: [AuthGuard]
   },
-  {
-    path: 'frm-main2',                                                    // de igual forma a  frm-main2
-    loadChildren: () => import('./frm-main2/frm-main2.module').then( m => m.FrmMain2PageModule), canActivate: [AuthGuard]
-  },
 ];
 
 @NgModule({

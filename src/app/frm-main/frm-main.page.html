@@ -1,40 +1,104 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Primera pestaña</ion-title>
+    <ion-title>COVID-19</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6" *ngFor="let sonido of sonidos">
-        <ion-card color="primary" (click)="reproducirSonido(sonido)">
-          <ion-img [src]="sonido.imagen"></ion-img>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">
+        Estadísticas
+      </ion-card-title>
+      <ion-card-subtitle>
+        <h4>
+          <ion-select value="Global" cancelText="Cancelar" interface="action-sheet">
+            <ion-select-option value="Global">Global</ion-select-option>
+            <!-- AQUÍ SE LLENA DE FORMA DINÁMICA POR CADA PAÍS-->
+            <ion-select-option *ngFor="let pais of paises" (click)="verEstadisticas(pais)">{{pais}}</ion-select-option>
+          </ion-select>
+        </h4>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-list>
+      <!-- NUEVOS CASOS CONFIRMADOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Nuevos casos:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.NewConfirmed}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+
+      <!-- TOTAL DE CASOS CONFIRMADOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Total de casos:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.TotalConfirmed}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+
+      <!-- NUEVOS DECESOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Nuevos decesos:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.NewDeaths}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+
+      <!-- TOTAL DECESOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Total decesos:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.TotalDeaths}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+
+      <!-- NUEVOS RECUPERADOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Nuevos recuperados:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.NewRecovered}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+
+      <!-- TOTAL RECUPERADOS -->
+      <ion-list-header>
+        <ion-item>
+          <ion-label>
+            Total recuperados:
+          </ion-label>
+          <ion-input disabled="true">
+            {{global.TotalRecovered}}
+          </ion-input>
+        </ion-item>
+      </ion-list-header>
+    </ion-list>
+  </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="danger" (click)="onSalir()">
       <ion-icon name="log-out-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" disabled="true">
-          <ion-icon name="play-back-outline"></ion-icon>
-           Primera
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button expand="block" routerLink="../frm-main2">
-          Segunda 
-          <ion-icon name="play-forward"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>
