@@ -12,10 +12,11 @@
       </ion-card-title>
       <ion-card-subtitle>
         <h4>
-          <ion-select value="Global" cancelText="Cancelar" interface="action-sheet">
-            <ion-select-option value="Global">Global</ion-select-option>
+          <ion-select value="Global" cancelText="Cancelar" interface="action-sheet" (ionChange)="verEstadisticas($event)" placeholder="Global">
             <!-- AQUÍ SE LLENA DE FORMA DINÁMICA POR CADA PAÍS-->
-            <ion-select-option *ngFor="let pais of paises" (click)="verEstadisticas(pais)">{{pais}}</ion-select-option>
+            <ion-select-option *ngFor="let pais of paises" >
+              {{pais.Country}}
+            </ion-select-option>
           </ion-select>
         </h4>
       </ion-card-subtitle>
@@ -29,7 +30,7 @@
             Nuevos casos:
           </ion-label>
           <ion-input disabled="true">
-            {{global.NewConfirmed}}
+            {{globalazo.NewConfirmed}}
           </ion-input>
         </ion-item>
       </ion-list-header>
@@ -41,7 +42,7 @@
             Total de casos:
           </ion-label>
           <ion-input disabled="true">
-            {{global.TotalConfirmed}}
+            {{globalazo.TotalConfirmed}}
           </ion-input>
         </ion-item>
       </ion-list-header>
@@ -53,7 +54,7 @@
             Nuevos decesos:
           </ion-label>
           <ion-input disabled="true">
-            {{global.NewDeaths}}
+            {{globalazo.NewDeaths}}
           </ion-input>
         </ion-item>
       </ion-list-header>
@@ -65,7 +66,7 @@
             Total decesos:
           </ion-label>
           <ion-input disabled="true">
-            {{global.TotalDeaths}}
+            {{globalazo.TotalDeaths}}
           </ion-input>
         </ion-item>
       </ion-list-header>
@@ -77,7 +78,7 @@
             Nuevos recuperados:
           </ion-label>
           <ion-input disabled="true">
-            {{global.NewRecovered}}
+            {{globalazo.NewRecovered}}
           </ion-input>
         </ion-item>
       </ion-list-header>
@@ -89,7 +90,7 @@
             Total recuperados:
           </ion-label>
           <ion-input disabled="true">
-            {{global.TotalRecovered}}
+            {{globalazo.TotalRecovered}}
           </ion-input>
         </ion-item>
       </ion-list-header>

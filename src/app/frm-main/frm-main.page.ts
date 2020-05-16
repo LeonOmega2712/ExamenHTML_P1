@@ -11,9 +11,9 @@ import { JsonService } from '../services/json.service';
 export class FrmMainPage implements OnInit {
   // VARIABLES GLOBALES
   datos;
-  global = [];
+  globalazo = [];
   paises = [];
-
+  quedateQuieto = [];
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private jsonProvider: JsonService) {}
 
@@ -26,20 +26,18 @@ export class FrmMainPage implements OnInit {
   async cargarDatos() {
     this.jsonProvider.obtenerDatos().subscribe(
       (data) => {
-        // TRAER TODOS LOS DATOS DE SUMMARY
+        // TRAER TODOS LOS DATOS DE LA API/SUMMARY
         this.datos = data;
-        console.log(this.datos);
-
+        this.paises.push(data['Global']);
+        this.paises[0]['Country']= 'Global';
         // SEPARAR LOS DATOS DE CADA PAIS EN LA LISTA PAISES
-        this.datos['Countries'].forEach(element => {
-          this.paises.push(element['Country']);
+        this.datos['Countries'].forEach((element) => {
+          this.paises.push(element);
         });
 
         // SEPARAR LOS DATOS GLOBALES DEL RESTO
-        this.global = this.datos['Global'];
-        console.log(this.global['NewConfirmed']);
-
-
+        // this.quedateQuieto = this.datos['Global'];
+        this.globalazo =this.paises[0];
       },
       (error) => {
         console.log(error);
@@ -47,10 +45,19 @@ export class FrmMainPage implements OnInit {
     );
   }
 
-  verEstadisticas(pais) {
-    const contenido = `
-      <ion-label>abr</ion-label>
-    `;
+  // CARGAR LAS ESTADÍSTICAS DE UN PAÍS SELECCIONADO DE LA LISTA
+  verEstadisticas(evento) {
+    if (evento.target.value.trim() === 'Global') { // CUANDO SELECCIONA GLOBAL DE VUELTA
+      console.log(this.paises[0]);
+      this.globalazo = this.paises[0];
+    } else {
+      // CUANDO SELECCIONA UN PAIS
+      this.paises.forEach((element) => {
+        if (element.Country === evento.target.value.trim()) {
+          this.globalazo = element;
+        }
+      });
+    }
   }
 
   // CERRAR SESIÓN EN FIREBASE
