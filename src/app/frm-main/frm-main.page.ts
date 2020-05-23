@@ -24,12 +24,12 @@ export class FrmMainPage implements OnInit {
 
   chartLabels: Label[];
 
-  chartType: 'line';
+  chartType = 'line';
 
   chartColors: Color[] = [
     {
-      borderColor: '#050505',
-      backgroundColor: '#0f0f0f'
+      borderColor: '#5aafff',
+      backgroundColor: '#0f50ff'
     }
   ];
 
@@ -74,7 +74,7 @@ export class FrmMainPage implements OnInit {
 
         // SEPARAR LOS DATOS GLOBALES DEL RESTO
         // this.quedateQuieto = this.datos['Global'];
-        this.globalazo =this.paises[0];
+        this.globalazo = this.paises[0];
       },
       (error) => {
         console.log(error);

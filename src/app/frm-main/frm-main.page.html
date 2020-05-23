@@ -101,6 +101,19 @@
     </ion-item>
   </ion-card>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Gráfica
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [chartType]="chartType" [colors]="chartColors">
+
+      </canvas>
+    </ion-card-content>
+  </ion-card>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="danger" (click)="onSalir()">
       <ion-icon name="log-out-outline"></ion-icon>
