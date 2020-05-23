@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from './../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import 'chartjs-plugin-zoom';
 
 @NgModule({
   declarations: [AppComponent],

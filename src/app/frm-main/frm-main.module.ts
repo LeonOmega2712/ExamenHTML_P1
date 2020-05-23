@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FrmMainPageRoutingModule } from './frm-main-routing.module';
 
 import { FrmMainPage } from './frm-main.page';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FrmMainPageRoutingModule
+    FrmMainPageRoutingModule,
+    ChartsModule
   ],
   declarations: [FrmMainPage]
 })
