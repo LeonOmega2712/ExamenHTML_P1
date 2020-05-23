@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { JsonService } from '../services/json.service';
-import { ChartDataSets } from 'chart.js';
+import { ChartDataSets, Chart } from 'chart.js';
 import { Label, Color } from 'ng2-charts';
 
 @Component({
@@ -11,6 +11,7 @@ import { Label, Color } from 'ng2-charts';
   styleUrls: ['./frm-main.page.scss'],
 })
 export class FrmMainPage implements OnInit {
+  @ViewChild('barCanvas', null) barCanvas: ElementRef;
   // VARIABLES GLOBALES
   datos;
   globalazo = [];
@@ -19,36 +20,7 @@ export class FrmMainPage implements OnInit {
   actualizado;
 
   //#region chart.js
-
-  chartData: ChartDataSets[] = [{data:[], label:'COVID-19'}];
-
-  chartLabels: Label[];
-
-  chartType = 'line';
-
-  chartColors: Color[] = [
-    {
-      borderColor: '#5aafff',
-      backgroundColor: '#0f50ff'
-    }
-  ];
-
-  chartOptions={
-    responsive : true,
-    title:{
-      display: true,
-      text: 'Ejemplo grafica'
-    },
-    pan: {
-      enabled: true,
-      mode: 'xy'
-    },
-    zoom: {
-      enabled: true,
-      mode: 'xy'
-    }
-  };
-
+  private barChart: Chart;
   //#endregion
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private jsonProvider: JsonService) {}
@@ -56,6 +28,54 @@ export class FrmMainPage implements OnInit {
   ngOnInit() {
     // OBTENER TODOS LOS PAISES DEL JSON Y GUARDARLOS EN UNA VARIABLE LOCAL
     this.cargarDatos();
+    this.cargarGrafica();
+  }
+
+  cargarGrafica() {
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: ['Nuevos casos', 'Total casos', 'Nuevos decesos', 'Total decesos', 'Nuevos recuperados', 'Total recuperados'],
+        datasets: [
+          {
+            label: '# Casos',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255,99,132,1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        maintainAspectRatio: false,
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
+        }
+      }
+    });
   }
 
   // EJECUTAR LA FUNCIÓN DEL SERVICIO PARA TRAER LA LISTA DE DATOS Y SEPARARLOS POR PAÍS
