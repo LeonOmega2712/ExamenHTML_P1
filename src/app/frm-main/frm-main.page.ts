@@ -18,6 +18,39 @@ export class FrmMainPage implements OnInit {
   quedateQuieto = [];
   actualizado;
 
+  //#region chart.js
+
+  chartData: ChartDataSets[] = [{data:[], label:'COVID-19'}];
+
+  chartLabels: Label[];
+
+  chartType: 'line';
+
+  chartColors: Color[] = [
+    {
+      borderColor: '#050505',
+      backgroundColor: '#0f0f0f'
+    }
+  ];
+
+  chartOptions={
+    responsive : true,
+    title:{
+      display: true,
+      text: 'Ejemplo grafica'
+    },
+    pan: {
+      enabled: true,
+      mode: 'xy'
+    },
+    zoom: {
+      enabled: true,
+      mode: 'xy'
+    }
+  };
+
+  //#endregion
+
   constructor(private router: Router, private afAuth: AngularFireAuth, private jsonProvider: JsonService) {}
 
   ngOnInit() {
