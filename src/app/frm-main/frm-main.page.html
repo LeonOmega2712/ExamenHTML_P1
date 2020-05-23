@@ -107,9 +107,29 @@
         Gráfica
       </ion-card-title>
     </ion-card-header>
-    <div class="chart-container" style="position: relative; height: 80vh;">
-      <canvas #barCanvas></canvas>
-    </div>
+    <ion-card-content>
+      <ion-chip (click)="tipoChart('bar')">
+        <ion-label>Barras</ion-label>
+      </ion-chip>
+      <ion-chip (click)="tipoChart('line')">
+        <ion-label>Línea</ion-label>
+      </ion-chip>
+      <ion-chip (click)="tipoChart('bubble')">
+        <ion-label>Burbuja</ion-label>
+      </ion-chip>
+      <ion-chip (click)="tipoChart('pie')">
+        <ion-label>Pastel</ion-label>
+      </ion-chip>
+      <ion-chip (click)="tipoChart('radar')">
+        <ion-label>Radar</ion-label>
+      </ion-chip>
+      <ion-chip (click)="tipoChart('polarArea')">
+        <ion-label>Polar</ion-label>
+      </ion-chip>
+    </ion-card-content>
+      <div class="chart-container" style="position: relative; height: 70vh;">
+        <canvas #barCanvas></canvas>
+      </div>
   </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { JsonService } from '../services/json.service';
-import { ChartDataSets, Chart } from 'chart.js';
-import { Label, Color } from 'ng2-charts';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-frm-main',
@@ -20,7 +19,54 @@ export class FrmMainPage implements OnInit {
   actualizado;
 
   //#region chart.js
-  private barChart: Chart;
+  barChart: Chart;
+  chartType = 'bar';
+  chartStructure = {
+    type: this.chartType,
+    data: {
+      labels: ['Nuevos casos', 'Total casos', 'Nuevos decesos', 'Total decesos', 'Nuevos recuperados', 'Total recuperados'],
+      datasets: [
+        {
+          label: '# Casos',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 3
+        }
+      ]
+    },
+    options: {
+      legend: {
+        display: false
+      },
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
+  }
+
+
   //#endregion
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private jsonProvider: JsonService) {}
@@ -32,50 +78,7 @@ export class FrmMainPage implements OnInit {
   }
 
   cargarGrafica() {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: ['Nuevos casos', 'Total casos', 'Nuevos decesos', 'Total decesos', 'Nuevos recuperados', 'Total recuperados'],
-        datasets: [
-          {
-            label: '# Casos',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
-        },
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
-    });
+    this.barChart = new Chart(this.barCanvas.nativeElement, this.chartStructure);
   }
 
   // EJECUTAR LA FUNCIÓN DEL SERVICIO PARA TRAER LA LISTA DE DATOS Y SEPARARLOS POR PAÍS
@@ -87,13 +90,13 @@ export class FrmMainPage implements OnInit {
         this.actualizado = data['Date'];
         this.paises.push(data['Global']);
         this.paises[0]['Country']= 'Global';
+
         // SEPARAR LOS DATOS DE CADA PAIS EN LA LISTA PAISES
         this.datos['Countries'].forEach((element) => {
           this.paises.push(element);
         });
 
         // SEPARAR LOS DATOS GLOBALES DEL RESTO
-        // this.quedateQuieto = this.datos['Global'];
         this.globalazo = this.paises[0];
       },
       (error) => {
@@ -122,5 +125,12 @@ export class FrmMainPage implements OnInit {
     this.afAuth.auth.signOut();
     console.log('Se ha cerrado sesión');
     this.router.navigateByUrl('/home');
+  }
+
+  tipoChart(tipo) {
+    this.barChart.destroy();
+    this.chartType = tipo;
+    this.chartStructure.type = tipo;
+    this.cargarGrafica();
   }
 }
