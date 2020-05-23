@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { JsonService } from "../services/json.service";
-import { Chart } from "chart.js";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { JsonService } from '../services/json.service';
+import { Chart } from 'chart.js';
 
 @Component({
-  selector: "app-frm-main",
-  templateUrl: "./frm-main.page.html",
-  styleUrls: ["./frm-main.page.scss"],
+  selector: 'app-frm-main',
+  templateUrl: './frm-main.page.html',
+  styleUrls: ['./frm-main.page.scss'],
 })
 export class FrmMainPage implements OnInit {
-  @ViewChild("barCanvas", null) barCanvas: ElementRef;
+  @ViewChild('barCanvas', null) barCanvas: ElementRef;
   // VARIABLES GLOBALES
   datos;
   globalazo = [];
@@ -21,30 +21,30 @@ export class FrmMainPage implements OnInit {
 
   //#region chart.js
   barChart: Chart;
-  chartType = "bar";
+  chartType = 'bar';
 
   chartStructure = {
     type: this.chartType,
     data: {
-      labels: ["Nuevos casos", "Total casos", "Nuevos decesos", "Total decesos", "Nuevos recuperados", "Total recuperados"],
+      labels: ['Nuevos casos', 'Total casos', 'Nuevos decesos', 'Total decesos', 'Nuevos recuperados', 'Total recuperados'],
       datasets: [
         {
           data: [1, 1, 1, 1, 1, 1],
           backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
           ],
           borderColor: [
-            "rgba(255,99,132,1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
           ],
           borderWidth: 3,
         },
@@ -87,25 +87,25 @@ export class FrmMainPage implements OnInit {
       (data) => {
         // TRAER TODOS LOS DATOS DE LA API/SUMMARY
         this.datos = data;
-        this.actualizado = data["Date"];
-        this.paises.push(data["Global"]);
-        this.paises[0]["Country"] = "Global";
+        this.actualizado = data['Date'];
+        this.paises.push(data['Global']);
+        this.paises[0]['Country'] = 'Global';
 
         // SEPARAR LOS DATOS DE CADA PAIS EN LA LISTA PAISES
-        this.datos["Countries"].forEach((element) => {
+        this.datos['Countries'].forEach((element) => {
           this.paises.push(element);
         });
 
         // SEPARAR LOS DATOS GLOBALES DEL RESTO
         this.globalazo = this.paises[0];
 
-        this.chartStructure.data.datasets[0]["data"] = [
-          this.globalazo["NewConfirmed"],
-          this.globalazo["TotalConfirmed"],
-          this.globalazo["NewDeaths"],
-          this.globalazo["TotalDeaths"],
-          this.globalazo["NewRecovered"],
-          this.globalazo["TotalRecovered"],
+        this.chartStructure.data.datasets[0]['data'] = [
+          this.globalazo['NewConfirmed'],
+          this.globalazo['TotalConfirmed'],
+          this.globalazo['NewDeaths'],
+          this.globalazo['TotalDeaths'],
+          this.globalazo['NewRecovered'],
+          this.globalazo['TotalRecovered'],
         ];
 
         if (this.barChart !== undefined) {
@@ -121,17 +121,17 @@ export class FrmMainPage implements OnInit {
 
   // CARGAR LAS ESTADÍSTICAS DE UN PAÍS SELECCIONADO DE LA LISTA
   verEstadisticas(evento) {
-    if (evento.target.value.trim() === "Global") {
+    if (evento.target.value.trim() === 'Global') {
       // CUANDO SELECCIONA GLOBAL DE VUELTA
       this.globalazo = this.paises[0];
 
-      this.chartStructure.data.datasets[0]["data"] = [
-        this.globalazo["NewConfirmed"],
-        this.globalazo["TotalConfirmed"],
-        this.globalazo["NewDeaths"],
-        this.globalazo["TotalDeaths"],
-        this.globalazo["NewRecovered"],
-        this.globalazo["TotalRecovered"],
+      this.chartStructure.data.datasets[0]['data'] = [
+        this.globalazo['NewConfirmed'],
+        this.globalazo['TotalConfirmed'],
+        this.globalazo['NewDeaths'],
+        this.globalazo['TotalDeaths'],
+        this.globalazo['NewRecovered'],
+        this.globalazo['TotalRecovered'],
       ];
 
       if (this.barChart !== undefined) {
@@ -146,13 +146,13 @@ export class FrmMainPage implements OnInit {
         }
       });
 
-      this.chartStructure.data.datasets[0]["data"] = [
-        this.globalazo["NewConfirmed"],
-        this.globalazo["TotalConfirmed"],
-        this.globalazo["NewDeaths"],
-        this.globalazo["TotalDeaths"],
-        this.globalazo["NewRecovered"],
-        this.globalazo["TotalRecovered"],
+      this.chartStructure.data.datasets[0]['data'] = [
+        this.globalazo['NewConfirmed'],
+        this.globalazo['TotalConfirmed'],
+        this.globalazo['NewDeaths'],
+        this.globalazo['TotalDeaths'],
+        this.globalazo['NewRecovered'],
+        this.globalazo['TotalRecovered'],
       ];
 
       if (this.barChart !== undefined) {
@@ -165,8 +165,8 @@ export class FrmMainPage implements OnInit {
   // CERRAR SESIÓN EN FIREBASE
   onSalir() {
     this.afAuth.auth.signOut();
-    console.log("Se ha cerrado sesión");
-    this.router.navigateByUrl("/home");
+    console.log('Se ha cerrado sesión');
+    this.router.navigateByUrl('/home');
   }
 
   tipoChart(tipo) {
