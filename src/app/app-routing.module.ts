@@ -31,7 +31,11 @@ const routes: Routes = [
   {
     path: 'card-editor/:col/:id',
     loadChildren: () => import('./card-editor/card-editor.module').then( m => m.CardEditorPageModule)
+  },  {
+    path: 'frm-main3',
+    loadChildren: () => import('./frm-main3/frm-main3.module').then( m => m.FrmMain3PageModule)
   },
+
 
 ];
 

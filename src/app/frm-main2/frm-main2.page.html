@@ -2,37 +2,156 @@
   <ion-toolbar>
     <ion-title>Bienvenido {{u.nombre}}</ion-title>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
-  <h1 style="text-align: center;">SEGUNDA COLECCIÓN</h1>
-  <ion-grid>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Empleados
+      </ion-card-title>
+      <ion-card-subtitle>
+        Registrar nuevos empleados
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <!-- NOMBRE DEL EMPLEADO -->
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input clearInput type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <!-- APELLIDO DEL EMPLEADO -->
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input clearInput type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <!-- CORREO DEL EMPLEADO -->
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input clearInput type="email"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Foto del empleado</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <!-- FOTO DEL EMPLEADO -->
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg"
+              alt="Foto del usuario"
+            />
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="text-align: center;">
+            Seleccionar foto desde:
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button
+              (click)="abrirGaleria()"
+              color="primary"
+              expand="block"
+              shape="round"
+            >
+              <ion-icon name="image" style="margin-right: 5px;"></ion-icon>
+              Galeria
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button
+              (click)="abrirCamara()"
+              color="primary"
+              expand="block"
+              shape="round"
+            >
+              <ion-icon name="camera" style="margin-right: 5px;"></ion-icon>
+              Foto
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-button expand="block" shape="round">
+      <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
+      Guardar
+    </ion-button>
+  </ion-card>
+
+  <!-- <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let col of coleccionDos">
-        <ion-card (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)" >
+        <ion-card
+          (mouseenter)="mouseArriba(col)"
+          (mouseleave)="mouseAfuera(col)"
+        >
           <ion-img [src]="col.foto"></ion-img>
           <ion-card-header style="text-align: center;">
             <ion-card-subtitle color="primary">
               {{col.nombre}}
             </ion-card-subtitle>
           </ion-card-header>
-          <ion-button *ngIf="col.oculto" expand="block" (click)="reproducirSonido(col)" color="success" fill="clear">
-            <ion-icon name="musical-notes-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            (click)="reproducirSonido(col)"
+            color="success"
+            fill="clear"
+          >
+            <ion-icon
+              name="musical-notes-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Reproducir
           </ion-button>
-          <ion-button *ngIf="col.oculto" expand="block" [routerLink]="['/card-editor/coleccionDos/'+col.uid]" color="warning" fill="clear">
-            <ion-icon name="create-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            [routerLink]="['/card-editor/coleccionDos/'+col.uid]"
+            color="warning"
+            fill="clear"
+          >
+            <ion-icon
+              name="create-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Editar
           </ion-button>
-          <ion-button *ngIf="col.oculto" expand="block" (click)="borrarRegistro(col)" color="danger" fill="clear">
-            <ion-icon name="close-circle-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            (click)="borrarRegistro(col)"
+            color="danger"
+            fill="clear"
+          >
+            <ion-icon
+              name="close-circle-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Borrar
           </ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!--FAB DE MENÚ-->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">

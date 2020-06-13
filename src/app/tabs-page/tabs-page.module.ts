@@ -28,6 +28,13 @@ const routes: Routes = [
             (m) => m.FrmMain2PageModule
           ),
       },
+      {
+        path: 'frm-main3', // de igual forma a  frm-main2
+        loadChildren: () =>
+          import('../frm-main3/frm-main3.module').then(
+            (m) => m.FrmMain3PageModule
+          ),
+      },
     ],
   },
   {

@@ -42,7 +42,7 @@
           alt="Foto del usuario"
         /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
 
-        <ion-item lines="none">
+        <!-- <ion-item lines="none">
           <ion-grid>
             <ion-row style="text-align: center;">
               <ion-col>
@@ -57,7 +57,7 @@
                   expand="block"
                   shape="round"
                 >
-                  <ion-icon name="image-outline"></ion-icon>
+                  <ion-icon name="image" style="margin-right: 5px;"></ion-icon>
                   Galeria
                 </ion-button>
               </ion-col>
@@ -68,13 +68,13 @@
                   expand="block"
                   shape="round"
                 >
-                  <ion-icon name="camera-outline"></ion-icon>
+                  <ion-icon name="camera" style="margin-right: 5px;"></ion-icon>
                   Foto
                 </ion-button>
               </ion-col>
             </ion-row>
           </ion-grid>
-        </ion-item>
+        </ion-item> -->
 
         <ion-list-header>
           Objetivo de venta
@@ -85,8 +85,8 @@
           <ion-input clearInput type="number"></ion-input>
         </ion-item>
       </ion-list>
-      <ion-button expand="block" shape="round">
-        <ion-icon name="save-outline" style="margin-right: 5px;"></ion-icon>
+      <ion-button expand="block" shape="round" (click)="actualizarObjetivoFoto()">
+        <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
         Guardar
       </ion-button>
     </ion-card-content>
