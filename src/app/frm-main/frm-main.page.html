@@ -5,27 +5,110 @@
 </ion-header>
 
 <ion-content>
-  <h1 style="text-align: center;">PRIMERA COLECCIÓN</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Empleado
+      </ion-card-title>
+      <ion-card-subtitle>
+        Asigne el objetivo de ventas
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-list-header>
+          Nombre
+        </ion-list-header>
+        <ion-select
+          placeholder="Seleccionar empleado"
+          cancelText="Cancelar"
+          interface="action-sheet"
+        >
+          <!-- AQUI SE LLENA DE FORMA DINAMICA POR TODOS LOS EMPLEADOS -->
+          <ion-select-option>
+            <!-- *ngFor="let empleado of ListaDeEmpleados" -->
+            <!-- {{empleado.nombre}} -->
+            Empleado de ejemplo
+          </ion-select-option>
+          <ion-select-option>
+            Empleado de ejemplo 2
+          </ion-select-option>
+        </ion-select>
+
+        <!-- FOTO DEL USUARIO -->
+        <ion-list-header>Fotografía</ion-list-header>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg"
+          alt="Foto del usuario"
+        /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
+        <ion-tab-button (click)="abrirCamara()">
+          <ion-icon name="camera"></ion-icon>
+          <ion-label>Photo</ion-label>
+        </ion-tab-button>
+
+        <ion-list-header>
+          Objetivo de venta
+        </ion-list-header>
+        <ion-item>
+          <ion-label position="floating">$</ion-label>
+          <!-- DONDE EL USUARIO INTRODUCE CANTIDAD DE VENTA ESPERADA -->
+          <ion-input clearInput type="number"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button>Guardar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
   <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let col of coleccionUno">
-        <ion-card (mouseenter)="mouseArriba(col)" (mouseleave)="mouseAfuera(col)">
+        <ion-card
+          (mouseenter)="mouseArriba(col)"
+          (mouseleave)="mouseAfuera(col)"
+        >
           <ion-img [src]="col.foto"></ion-img>
           <ion-card-header style="text-align: center;">
             <ion-card-subtitle color="primary">
               {{col.nombre}}
             </ion-card-subtitle>
           </ion-card-header>
-          <ion-button *ngIf="col.oculto" expand="block" (click)="reproducirSonido(col)" color="success" fill="clear">
-            <ion-icon name="musical-notes-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            (click)="reproducirSonido(col)"
+            color="success"
+            fill="clear"
+          >
+            <ion-icon
+              name="musical-notes-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Reproducir
           </ion-button>
-          <ion-button *ngIf="col.oculto" expand="block" [routerLink]="['/card-editor/coleccionUno/'+col.uid]" color="warning" fill="clear">
-            <ion-icon name="create-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            [routerLink]="['/card-editor/coleccionUno/'+col.uid]"
+            color="warning"
+            fill="clear"
+          >
+            <ion-icon
+              name="create-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Editar
           </ion-button>
-          <ion-button *ngIf="col.oculto" expand="block" (click)="borrarRegistro(col)" color="danger" fill="clear">
-            <ion-icon name="close-circle-outline" style="margin-right: 3px;"></ion-icon>
+          <ion-button
+            *ngIf="col.oculto"
+            expand="block"
+            (click)="borrarRegistro(col)"
+            color="danger"
+            fill="clear"
+          >
+            <ion-icon
+              name="close-circle-outline"
+              style="margin-right: 3px;"
+            ></ion-icon>
             Borrar
           </ion-button>
         </ion-card>
@@ -45,7 +128,10 @@
       </ion-fab-button>
 
       <!--FAB DE EDITAR ITEM-->
-      <ion-fab-button color="warning" [routerLink]="['/card-editor/coleccionUno/Agregar']">
+      <ion-fab-button
+        color="warning"
+        [routerLink]="['/card-editor/coleccionUno/Agregar']"
+      >
         <ion-icon name="create-outline"></ion-icon>
       </ion-fab-button>
 
