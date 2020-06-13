@@ -8,10 +8,10 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>
-        Empleado
+        Ventas
       </ion-card-title>
       <ion-card-subtitle>
-        Asigne el objetivo de ventas
+        Asigne el objetivo de los empleados
       </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
@@ -41,10 +41,40 @@
           src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg"
           alt="Foto del usuario"
         /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
-        <ion-tab-button (click)="abrirCamara()">
-          <ion-icon name="camera"></ion-icon>
-          <ion-label>Photo</ion-label>
-        </ion-tab-button>
+
+        <ion-item lines="none">
+          <ion-grid>
+            <ion-row style="text-align: center;">
+              <ion-col>
+                Nueva foto desde:
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button
+                  (click)="abrirGaleria()"
+                  color="primary"
+                  expand="block"
+                  shape="round"
+                >
+                  <ion-icon name="image-outline"></ion-icon>
+                  Galeria
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button
+                  (click)="abrirCamara()"
+                  color="primary"
+                  expand="block"
+                  shape="round"
+                >
+                  <ion-icon name="camera-outline"></ion-icon>
+                  Foto
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
 
         <ion-list-header>
           Objetivo de venta
@@ -56,13 +86,13 @@
         </ion-item>
       </ion-list>
       <ion-button expand="block" shape="round">
-        <ion-icon name="save-outline"></ion-icon>
+        <ion-icon name="save-outline" style="margin-right: 5px;"></ion-icon>
         Guardar
       </ion-button>
     </ion-card-content>
   </ion-card>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col size="6" *ngFor="let col of coleccionUno">
         <ion-card
@@ -117,7 +147,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <!--FAB DE MENÚ-->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
@@ -125,19 +155,6 @@
       <ion-icon md="caret-back" ios="chevron-back-circle-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">
-      <!--FAB DE PERFIL-->
-      <ion-fab-button color="success" (click)="abrirPerfil()">
-        <ion-icon name="person-outline"></ion-icon>
-      </ion-fab-button>
-
-      <!--FAB DE EDITAR ITEM-->
-      <ion-fab-button
-        color="warning"
-        [routerLink]="['/card-editor/coleccionUno/Agregar']"
-      >
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-fab-button>
-
       <!--FAB DE LOG-OUT-->
       <ion-fab-button color="danger" (click)="onSalir()">
         <ion-icon name="log-out-outline"></ion-icon>
