@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
-import { usuario } from '../shared/usuario.class';
+import { empleado } from '../shared/usuario.class';
 
 @Component({
   selector: 'app-frm-main',
@@ -10,9 +10,6 @@ import { usuario } from '../shared/usuario.class';
   styleUrls: ['./frm-main.page.scss'],
 })
 export class FrmMainPage implements OnInit {
-  u: usuario = new usuario();
-
-  coleccionUno = [];
   listaDeEmpleados = [];
 
   constructor(
@@ -23,17 +20,20 @@ export class FrmMainPage implements OnInit {
 
   ngOnInit() {
     // CARGAR TODOS LOS EMPLEADOS EN UNA LISTA Y LLENARLOS EN EL ION-SELECT
+    this.cargarColeccion();
   }
 
   // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
   cargarColeccion() {
-    this.fireSvc.getTodoCollection('coleccionUno').subscribe((data) => {
-      this.coleccionUno = data.map((e) => {
+    this.fireSvc.getTodoCollection('empleados').subscribe((data) => {
+      this.listaDeEmpleados = data.map((e) => {
         return {
-          uid: e.payload.doc.id,
+          id: e.payload.doc.id,
           nombre: e.payload.doc.data()['nombre'],
-          foto: e.payload.doc.data()['fotoLink'],
-          audio: e.payload.doc.data()['audioLink'],
+          apellido: e.payload.doc.data()['apellido'],
+          correo: e.payload.doc.data()['correo'],
+          fotoUrl: e.payload.doc.data()['fotoUrl'],
+          objetivoDeVentas: e.payload.doc.data()['objetivoDeVentas'],
         };
       });
     });

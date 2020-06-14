@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
-import { usuario, empleado } from '../shared/usuario.class';
+import { empleado } from '../shared/usuario.class';
 import {
   Camera,
   CameraOptions,

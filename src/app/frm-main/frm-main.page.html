@@ -19,14 +19,8 @@
           interface="action-sheet"
         >
           <!-- AQUI SE LLENA DE FORMA DINAMICA POR TODOS LOS EMPLEADOS -->
-          <ion-select-option>
-            <!--<ion-select-option *ngFor="let empleado of listaDeEmpleados">
-                {{empleado.nombre}}
-              </ion-select-option>-->
-            Empleado de ejemplo
-          </ion-select-option>
-          <ion-select-option>
-            Empleado de ejemplo 2
+          <ion-select-option *ngFor="let empleado of listaDeEmpleados">
+            {{empleado.nombre}}
           </ion-select-option>
         </ion-select>
 
