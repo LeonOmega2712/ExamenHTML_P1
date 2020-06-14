@@ -20,8 +20,9 @@
         >
           <!-- AQUI SE LLENA DE FORMA DINAMICA POR TODOS LOS EMPLEADOS -->
           <ion-select-option>
-            <!-- *ngFor="let empleado of ListaDeEmpleados" -->
-            <!-- {{empleado.nombre}} -->
+            <!--<ion-select-option *ngFor="let empleado of listaDeEmpleados">
+                {{empleado.nombre}}
+              </ion-select-option>-->
             Empleado de ejemplo
           </ion-select-option>
           <ion-select-option>
@@ -36,40 +37,6 @@
           alt="Foto del usuario"
         /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
 
-        <!-- <ion-item lines="none">
-          <ion-grid>
-            <ion-row style="text-align: center;">
-              <ion-col>
-                Nueva foto desde:
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="6">
-                <ion-button
-                  (click)="abrirGaleria()"
-                  color="primary"
-                  expand="block"
-                  shape="round"
-                >
-                  <ion-icon name="image" style="margin-right: 5px;"></ion-icon>
-                  Galeria
-                </ion-button>
-              </ion-col>
-              <ion-col size="6">
-                <ion-button
-                  (click)="abrirCamara()"
-                  color="primary"
-                  expand="block"
-                  shape="round"
-                >
-                  <ion-icon name="camera" style="margin-right: 5px;"></ion-icon>
-                  Foto
-                </ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item> -->
-
         <ion-list-header>
           Objetivo de venta
         </ion-list-header>
@@ -79,69 +46,16 @@
           <ion-input clearInput type="number"></ion-input>
         </ion-item>
       </ion-list>
-      <ion-button expand="block" shape="round" (click)="actualizarObjetivoFoto()">
+      <ion-button
+        expand="block"
+        shape="round"
+        (click)="actualizarObjetivoFoto()"
+      >
         <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
         Guardar
       </ion-button>
     </ion-card-content>
   </ion-card>
-
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col size="6" *ngFor="let col of coleccionUno">
-        <ion-card
-          (mouseenter)="mouseArriba(col)"
-          (mouseleave)="mouseAfuera(col)"
-        >
-          <ion-img [src]="col.foto"></ion-img>
-          <ion-card-header style="text-align: center;">
-            <ion-card-subtitle color="primary">
-              {{col.nombre}}
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            (click)="reproducirSonido(col)"
-            color="success"
-            fill="clear"
-          >
-            <ion-icon
-              name="musical-notes-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Reproducir
-          </ion-button>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            [routerLink]="['/card-editor/coleccionUno/'+col.uid]"
-            color="warning"
-            fill="clear"
-          >
-            <ion-icon
-              name="create-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Editar
-          </ion-button>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            (click)="borrarRegistro(col)"
-            color="danger"
-            fill="clear"
-          >
-            <ion-icon
-              name="close-circle-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Borrar
-          </ion-button>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 
   <!--FAB DE MENÚ-->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">

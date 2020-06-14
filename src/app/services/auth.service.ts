@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { AlertController } from "@ionic/angular";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from "@angular/fire/firestore/";
-import { usuario } from "../shared/usuario.class";
-import { empleado } from "../shared/usuario.class";
+import { Injectable } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore/';
+import { usuario } from '../shared/usuario.class';
+import { empleado } from '../shared/usuario.class';
 import {
   AngularFireUploadTask,
   AngularFireStorage,
-} from "@angular/fire/storage";
+} from '@angular/fire/storage';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
   public isLogged: any = false;
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   registrarEmpleadoEnFirebase(empleado: empleado) {
-    return this.afStore.collection("empleados").add(empleado);
+    return this.afStore.collection('empleados').add(empleado);
   }
 
   // TRAER UN REGISTRO DE UNA COLECCIÓN USANDO UN UID
@@ -50,10 +50,10 @@ export class AuthService {
       );
     } catch (e) {
       const alert = await this.alertW.create({
-        header: "Error",
+        header: 'Error',
         message:
-          "Verifique que el correo sea correcto, y que la contraseña cuente con al menos 6 caracteres",
-        buttons: ["OK"],
+          'Verifique que el correo sea correcto, y que la contraseña cuente con al menos 6 caracteres',
+        buttons: ['OK'],
       });
 
       await alert.present();
@@ -68,9 +68,9 @@ export class AuthService {
       );
     } catch (e) {
       const alert = await this.alertW.create({
-        header: "Error",
-        message: "Verifique su correo y contraseña",
-        buttons: ["OK"],
+        header: 'Error',
+        message: 'Verifique su correo y contraseña',
+        buttons: ['OK'],
       });
 
       await alert.present();
@@ -80,20 +80,20 @@ export class AuthService {
   // BORRAR REGISTRO Y ARCHIVOS (AUDIO Y FOTO) DE FIREBASE
   borrarDeFirebase(obj, coleccion) {
     this.afStore.collection(coleccion).doc(obj.uid).delete();
-    this.fireStorage.ref(coleccion + "/img/" + obj.nombre).delete();
-    this.fireStorage.ref(coleccion + "/sound/" + obj.nombre).delete();
+    this.fireStorage.ref(coleccion + '/img/' + obj.nombre).delete();
+    this.fireStorage.ref(coleccion + '/sound/' + obj.nombre).delete();
   }
 
   // SUBIR ARCHIVO DE FOTO A FIREBASE
   subirFotoEnFirebase(path, information, name): AngularFireUploadTask {
     return this.fireStorage
-      .ref("/" + path + "/img/" + name)
-      .putString(information, "base64", { contentType: "image/jpeg" });
+      .ref('/' + path + '/img/' + name)
+      .putString(information, 'base64', { contentType: 'image/jpeg' });
   }
 
   // SUBIR ARCHIVO DE AUDIO A FIREBASE
   subirAudioEnFirebase(path, information, name): AngularFireUploadTask {
-    return this.fireStorage.ref("/" + path + "/sound/" + name).put(information);
+    return this.fireStorage.ref('/' + path + '/sound/' + name).put(information);
   }
 
   // ENLAZAR UN AUDIO Y FOTO EN UN REGISTRO DE FIREBASE
@@ -114,6 +114,6 @@ export class AuthService {
       fotoUrl: empleado.fotoUrl,
       objetivoDeVentas: empleado.objetivoDeVenta,
     };
-    return this.afStore.collection("empleados").add(empleadoParaGuardar);
+    return this.afStore.collection('empleados').add(empleadoParaGuardar);
   }
 }

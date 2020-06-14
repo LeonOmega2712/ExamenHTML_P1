@@ -10,28 +10,19 @@ import { usuario } from '../shared/usuario.class';
   styleUrls: ['./frm-main.page.scss'],
 })
 export class FrmMainPage implements OnInit {
-  uid;
   u: usuario = new usuario();
 
   coleccionUno = [];
+  listaDeEmpleados = [];
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService) {}
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private fireSvc: AuthService
+  ) {}
 
   ngOnInit() {
-    // CONSEGUIR EL UID DEL USUARIO Y QUITARLE LAS COMILLAS DE JSON.STRINGIFY
-    this.uid = localStorage.getItem('uid');
-    this.uid = this.uid.replace('"', '');
-    this.uid = this.uid.replace('"', '');
-
-    // COMRPOBAR EN FIREBASE SI EL USUARIO ACTUAL TIENE NOMBRE RESGITRADO
-    this.fireSvc.getComodin(this.uid, 'usuarios').subscribe((result) => {
-      if (result.payload.get('nombre') !== undefined) {
-        this.u.nombre = result.payload.data()['nombre'];
-      } else {
-        this.u.nombre = '----------';
-      }
-      this.cargarColeccion();
-    });
+    // CARGAR TODOS LOS EMPLEADOS EN UNA LISTA Y LLENARLOS EN EL ION-SELECT
   }
 
   // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
@@ -48,42 +39,8 @@ export class FrmMainPage implements OnInit {
     });
   }
 
-  mouseArriba(obj) {
-    this.coleccionUno.map(function(dato){
-      if(dato === obj){
-        dato.oculto = true;
-      }
-    });
-  }
-
-  mouseAfuera(obj) {
-    this.coleccionUno.map(function(dato){
-      if(dato === obj){
-        dato.oculto = false;
-      }
-    });
-  }
-
   onSalir() {
     this.afAuth.auth.signOut();
     this.router.navigateByUrl('/home');
-    localStorage.removeItem('uid');
-    localStorage.removeItem('correo');
   }
-
-  reproducirSonido(s) {
-    let sonido = new Audio();
-    sonido.src = s.audio;
-    sonido.play();
-  }
-
-  abrirPerfil() {
-    this.router.navigateByUrl('/user-profile');
-  }
-
-  // BORRAR UN ELEMENTO DE FIREBASE
-  borrarRegistro(obj) {
-    this.fireSvc.borrarDeFirebase(obj, 'coleccionUno');
-  }
-
 }

@@ -86,63 +86,6 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col size="6" *ngFor="let col of coleccionDos">
-        <ion-card
-          (mouseenter)="mouseArriba(col)"
-          (mouseleave)="mouseAfuera(col)"
-        >
-          <ion-img [src]="col.foto"></ion-img>
-          <ion-card-header style="text-align: center;">
-            <ion-card-subtitle color="primary">
-              {{col.nombre}}
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            (click)="reproducirSonido(col)"
-            color="success"
-            fill="clear"
-          >
-            <ion-icon
-              name="musical-notes-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Reproducir
-          </ion-button>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            [routerLink]="['/card-editor/coleccionDos/'+col.uid]"
-            color="warning"
-            fill="clear"
-          >
-            <ion-icon
-              name="create-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Editar
-          </ion-button>
-          <ion-button
-            *ngIf="col.oculto"
-            expand="block"
-            (click)="borrarRegistro(col)"
-            color="danger"
-            fill="clear"
-          >
-            <ion-icon
-              name="close-circle-outline"
-              style="margin-right: 3px;"
-            ></ion-icon>
-            Borrar
-          </ion-button>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
   <!--FAB DE MENÚ-->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="light">

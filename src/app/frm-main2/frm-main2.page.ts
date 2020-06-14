@@ -9,14 +9,13 @@ import {
   PictureSourceType,
 } from '@ionic-native/camera/ngx';
 import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-frm-main2',
   templateUrl: './frm-main2.page.html',
   styleUrls: ['./frm-main2.page.scss'],
 })
 export class FrmMain2Page implements OnInit {
-  uid;
-  u: usuario = new usuario();
   imagenDelEmpleado =
     'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
   imagenData;
@@ -46,31 +45,10 @@ export class FrmMain2Page implements OnInit {
     private alertCon: AlertController
   ) {}
 
-  ngOnInit() {
-    // CONSEGUIR EL UID DEL USUARIO Y QUITARLE LAS COMILLAS DE JSON.STRINGIFY
-    this.uid = localStorage.getItem('uid');
-    this.uid = this.uid.replace('"', '');
-    this.uid = this.uid.replace('"', '');
-
-    // COMRPOBAR EN FIREBASE SI EL USUARIO ACTUAL TIENE NOMBRE RESGITRADO
-    this.fireSvc.getComodin(this.uid, 'usuarios').subscribe((result) => {
-      if (result.payload.get('nombre') !== undefined) {
-        this.u.nombre = result.payload.data()['nombre'];
-      } else {
-        this.u.nombre = '----------';
-      }
-    });
-  }
+  ngOnInit() {}
 
   async registrarEmpleado() {
-    let nombreDeFoto = `${this.empleado.correo}_${this.empleado.nombre}_${this.empleado.apellido}`;
-
-    const alert = await this.alertCon.create({
-      header: 'Debuggeando',
-      message: `${nombreDeFoto}`,
-      buttons: ['OK'],
-    });
-    await alert.present();
+    const nombreDeFoto = `${this.empleado.correo}_${this.empleado.nombre}_${this.empleado.apellido}`;
 
     let subirIm = this.fireSvc.subirFotoEnFirebase(
       'empleados',
@@ -78,10 +56,23 @@ export class FrmMain2Page implements OnInit {
       nombreDeFoto
     );
     await subirIm.then((res) => {
-      res.ref.getDownloadURL().then((url) => {
+      res.ref.getDownloadURL().then(async (url) => {
         this.empleado.fotoUrl = url;
         this.empleado.objetivoDeVenta = '0';
         this.fireSvc.guardarEmpleadoCompletoEnfireabse(this.empleado);
+        const alert = await this.alertCon.create({
+          header: 'Se ha registrado al empleado',
+          subHeader:
+            'Puede asignar el objetivo de venta en la pestaña de ventas',
+          message: `<b>Nombre:</b><br>${this.empleado.nombre}<br><br>
+          <b>Apellido:</b><br>${this.empleado.apellido}<br><br>
+          <b>Correo:</b><br>${this.empleado.correo}<br><br>`,
+          buttons: ['Entendido'],
+        });
+        await alert.present();
+        this.empleado = new empleado();
+        this.imagenDelEmpleado =
+          'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
       });
     });
   }
@@ -103,7 +94,5 @@ export class FrmMain2Page implements OnInit {
   onSalir() {
     this.afAuth.auth.signOut();
     this.router.navigateByUrl('/home');
-    localStorage.removeItem('uid');
-    localStorage.removeItem('correo');
   }
 }
