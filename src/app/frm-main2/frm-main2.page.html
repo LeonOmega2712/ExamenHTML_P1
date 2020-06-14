@@ -15,14 +15,14 @@
           <ion-item>
             <!-- NOMBRE DEL EMPLEADO -->
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input clearInput type="text"></ion-input>
+            <ion-input clearInput type="text" required [(ngModel)]="empleado.nombre"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <!-- APELLIDO DEL EMPLEADO -->
             <ion-label position="floating">Apellido</ion-label>
-            <ion-input clearInput type="text"></ion-input>
+            <ion-input clearInput type="text" required [(ngModel)]="empleado.apellido"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -31,7 +31,7 @@
           <ion-item>
             <!-- CORREO DEL EMPLEADO -->
             <ion-label position="floating">Correo</ion-label>
-            <ion-input clearInput type="email"></ion-input>
+            <ion-input clearInput type="email" required  [(ngModel)]="empleado.correo"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -39,7 +39,7 @@
         <ion-col>
           <ion-item lines="none">
             <!-- FOTO DEL EMPLEADO -->
-            <img [src]="imagenDelEmpleado" />
+            <img [src]="imagenDelEmpleado"/>
           </ion-item>
         </ion-col>
       </ion-row>

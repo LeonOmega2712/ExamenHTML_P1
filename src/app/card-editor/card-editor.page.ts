@@ -56,7 +56,7 @@ export class CardEditorPage implements OnInit {
     let datoGato  = [];
     datoGato['uid'] = this.idCarta;
     datoGato['nombre'] = this.nombreCartaViejo;
-    
+
     // SI ESTÁ MODIFICANDO, BORRAR EL ELEMENTO EDITADO Y GUARDARLO CON LOS NUEVOS DATOS
     if (this.idCarta !== 'Agregar') {
       this.authSvc.borrarDeFirebase(datoGato, this.coleccion);

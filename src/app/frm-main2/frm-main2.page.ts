@@ -3,8 +3,12 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { usuario, empleado } from '../shared/usuario.class';
-import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
-
+import {
+  Camera,
+  CameraOptions,
+  PictureSourceType,
+} from '@ionic-native/camera/ngx';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-frm-main2',
   templateUrl: './frm-main2.page.html',
@@ -13,8 +17,10 @@ import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/n
 export class FrmMain2Page implements OnInit {
   uid;
   u: usuario = new usuario();
-  imagenDelEmpleado = 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
+  imagenDelEmpleado =
+    'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
   imagenData;
+  empleado: empleado = new empleado();
 
   options: CameraOptions = {
     quality: 50,
@@ -37,6 +43,7 @@ export class FrmMain2Page implements OnInit {
     private afAuth: AngularFireAuth,
     private fireSvc: AuthService,
     private camera: Camera,
+    private alertCon: AlertController
   ) {}
 
   ngOnInit() {
@@ -55,22 +62,42 @@ export class FrmMain2Page implements OnInit {
     });
   }
 
-  registrarEmpleado() {}
+  async registrarEmpleado() {
+    let nombreDeFoto = `${this.empleado.correo}_${this.empleado.nombre}_${this.empleado.apellido}`;
+
+    const alert = await this.alertCon.create({
+      header: 'Debuggeando',
+      message: `${nombreDeFoto}`,
+      buttons: ['OK'],
+    });
+    await alert.present();
+
+    let subirIm = this.fireSvc.subirFotoEnFirebase(
+      'empleados',
+      this.imagenData,
+      nombreDeFoto
+    );
+    await subirIm.then((res) => {
+      res.ref.getDownloadURL().then((url) => {
+        this.empleado.fotoUrl = url;
+        this.empleado.objetivoDeVenta = '0';
+        this.fireSvc.guardarEmpleadoCompletoEnfireabse(this.empleado);
+      });
+    });
+  }
 
   abrirGaleria() {
-    this.imagenData = this.camera
-      .getPicture(this.gallery)
-      .then((imagenData) => {
-        this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
-      });
+    this.camera.getPicture(this.gallery).then((imagenData) => {
+      this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
+      this.imagenData = imagenData;
+    });
   }
 
   abrirCamara() {
-    this.imagenData = this.camera
-      .getPicture(this.options)
-      .then((imagenData) => {
-        this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
-      });
+    this.camera.getPicture(this.options).then((imagenData) => {
+      this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
+      this.imagenData = imagenData;
+    });
   }
 
   onSalir() {
