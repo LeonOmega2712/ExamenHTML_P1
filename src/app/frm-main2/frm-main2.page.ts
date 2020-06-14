@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { usuario, empleado } from '../shared/usuario.class';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-frm-main2',
@@ -13,17 +13,31 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class FrmMain2Page implements OnInit {
   uid;
   u: usuario = new usuario();
-  imagenDelEmpleado;
+  imagenDelEmpleado = 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
   imagenData;
 
   options: CameraOptions = {
     quality: 50,
+    sourceType: PictureSourceType.CAMERA,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
+    mediaType: this.camera.MediaType.PICTURE,
   };
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService, private camera: Camera) {}
+  gallery: CameraOptions = {
+    quality: 50,
+    sourceType: PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+  };
+
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private fireSvc: AuthService,
+    private camera: Camera,
+  ) {}
 
   ngOnInit() {
     // CONSEGUIR EL UID DEL USUARIO Y QUITARLE LAS COMILLAS DE JSON.STRINGIFY
@@ -41,18 +55,22 @@ export class FrmMain2Page implements OnInit {
     });
   }
 
-  registrarEmpleado() {
-
-  }
+  registrarEmpleado() {}
 
   abrirGaleria() {
-
+    this.imagenData = this.camera
+      .getPicture(this.gallery)
+      .then((imagenData) => {
+        this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
+      });
   }
 
   abrirCamara() {
-    this.imagenData = this.camera.getPicture(this.options).then((imagenData) => {
-      this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
-    });
+    this.imagenData = this.camera
+      .getPicture(this.options)
+      .then((imagenData) => {
+        this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
+      });
   }
 
   onSalir() {

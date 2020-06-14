@@ -39,15 +39,13 @@
         <ion-col>
           <ion-item lines="none">
             <!-- FOTO DEL EMPLEADO -->
-            <img
-              [src]="imagenDelEmpleado"
-            />
+            <img [src]="imagenDelEmpleado" />
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <ion-item>
+    <ion-item lines="none">
       <ion-grid>
         <ion-row>
           <ion-col style="text-align: center;">
@@ -80,10 +78,12 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-button expand="block" shape="round" (click)="registrarEmpleado()">
-      <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
-      Guardar
-    </ion-button>
+    <ion-card-content>
+      <ion-button expand="block" shape="round" (click)="registrarEmpleado()">
+        <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
+        Guardar
+      </ion-button>
+    </ion-card-content>
   </ion-card>
 
   <!-- <ion-grid>
