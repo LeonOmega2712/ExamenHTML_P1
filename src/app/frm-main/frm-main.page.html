@@ -17,17 +17,21 @@
           placeholder="Seleccionar empleado"
           cancelText="Cancelar"
           interface="action-sheet"
+          (ionChange)="cargarImagen($event)"
         >
           <!-- AQUI SE LLENA DE FORMA DINAMICA POR TODOS LOS EMPLEADOS -->
-          <ion-select-option *ngFor="let empleado of listaDeEmpleados">
-            {{empleado.nombre}}
+          <ion-select-option
+            *ngFor="let empleado of listaDeEmpleados"
+            
+          >
+            {{empleado.nombre}} {{empleado.apellido}}
           </ion-select-option>
         </ion-select>
 
         <!-- FOTO DEL USUARIO -->
         <ion-list-header>Fotografía</ion-list-header>
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg"
+        [src]="imagenDelEmpleado"
           alt="Foto del usuario"
         /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
 
