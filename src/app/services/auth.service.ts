@@ -112,7 +112,7 @@ export class AuthService {
       apellido: empleado.apellido,
       correo: empleado.correo,
       fotoUrl: empleado.fotoUrl,
-      objetivoDeVentas: empleado.objetivoDeVenta,
+      objetivoDeVenta: empleado.objetivoDeVenta,
     };
     return this.afStore.collection('empleados').add(empleadoParaGuardar);
   }

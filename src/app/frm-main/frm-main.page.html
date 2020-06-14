@@ -31,7 +31,7 @@
         <!-- FOTO DEL USUARIO -->
         <ion-list-header>Fotografía</ion-list-header>
         <img
-        [src]="imagenDelEmpleado"
+        [src]="empleadoSeleccionado.fotoUrl"
           alt="Foto del usuario"
         /><!-- *ngIf="fotoDelEmpleado" [src]="FotoDelEmpleado" una vez que toma la foto-->
 
@@ -41,13 +41,13 @@
         <ion-item>
           <ion-label position="floating">$</ion-label>
           <!-- DONDE EL USUARIO INTRODUCE CANTIDAD DE VENTA ESPERADA -->
-          <ion-input clearInput type="number"></ion-input>
+          <ion-input clearInput type="number" [(ngModel)]="empleadoSeleccionado.objetivoDeVenta"></ion-input>
         </ion-item>
       </ion-list>
       <ion-button
         expand="block"
         shape="round"
-        (click)="actualizarObjetivoFoto()"
+        (click)="actualizarObjetivoDeVenta()"
       >
         <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
         Guardar

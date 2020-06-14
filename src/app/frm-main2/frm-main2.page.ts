@@ -61,9 +61,9 @@ export class FrmMain2Page implements OnInit {
         this.empleado.objetivoDeVenta = '0';
         this.fireSvc.guardarEmpleadoCompletoEnfireabse(this.empleado);
         const alert = await this.alertCon.create({
-          header: 'Se ha registrado al empleado',
+          header: '¡Empleado registrado!',
           subHeader:
-            'Puede asignar el objetivo de venta en la pestaña de ventas',
+            'Asigne el objetivo de venta en la pestaña de ventas',
           message: `<b>Nombre:</b><br>${this.empleado.nombre}<br><br>
           <b>Apellido:</b><br>${this.empleado.apellido}<br><br>
           <b>Correo:</b><br>${this.empleado.correo}<br><br>`,

@@ -12,7 +12,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class FrmMainPage implements OnInit {
   listaDeEmpleados = [];
-  imagenDelEmpleado = 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
+  empleadoSeleccionado: empleado = new empleado();
+  idActual;
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
@@ -23,6 +24,8 @@ export class FrmMainPage implements OnInit {
   ngOnInit() {
     // CARGAR TODOS LOS EMPLEADOS EN UNA LISTA Y LLENARLOS EN EL ION-SELECT
     this.cargarColeccion();
+    this.empleadoSeleccionado.fotoUrl =
+      'https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg';
   }
 
   // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
@@ -35,7 +38,7 @@ export class FrmMainPage implements OnInit {
           apellido: e.payload.doc.data()['apellido'],
           correo: e.payload.doc.data()['correo'],
           fotoUrl: e.payload.doc.data()['fotoUrl'],
-          objetivoDeVentas: e.payload.doc.data()['objetivoDeVentas'],
+          objetivoDeVenta: e.payload.doc.data()['objetivoDeVenta'],
         };
       });
     });
@@ -49,11 +52,28 @@ export class FrmMainPage implements OnInit {
   cargarImagen(evento) {
     this.listaDeEmpleados.forEach((empleado) => {
       if (
-        empleado['nombre'] + ' ' + empleado['apellido'] ===
+        `${empleado['nombre']} ${empleado['apellido']}` ===
         evento.target.value.trim()
       ) {
-        this.imagenDelEmpleado = `${empleado['fotoUrl']}`;
+        this.empleadoSeleccionado = empleado;
+        this.idActual = empleado['id'];
       }
     });
+  }
+
+  async actualizarObjetivoDeVenta() {
+    this.fireSvc.actualizarUsuario(
+      this.idActual,
+      this.empleadoSeleccionado,
+      'empleados'
+    );
+
+    const alert = await this.alertCon.create({
+      header: 'Nuevo objetivo de venta',
+      subHeader: `${this.empleadoSeleccionado.nombre} debe vender:`,
+      message: `<b>\$</b>${this.empleadoSeleccionado.objetivoDeVenta}`,
+      buttons: ['Entendido'],
+    });
+    await alert.present();
   }
 }
