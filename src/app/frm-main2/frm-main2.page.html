@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Bienvenido {{u.nombre}}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-card>
     <ion-card-header>
@@ -43,14 +37,10 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Foto del empleado</ion-label>
-          </ion-item>
           <ion-item lines="none">
             <!-- FOTO DEL EMPLEADO -->
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Google_Camera_Icon.svg"
-              alt="Foto del usuario"
+              [src]="imagenDelEmpleado"
             />
           </ion-item>
         </ion-col>
@@ -90,7 +80,7 @@
         </ion-row>
       </ion-grid>
     </ion-item>
-    <ion-button expand="block" shape="round">
+    <ion-button expand="block" shape="round" (click)="registrarEmpleado()">
       <ion-icon name="save" style="margin-right: 5px;"></ion-icon>
       Guardar
     </ion-button>

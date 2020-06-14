@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore/';
 import { usuario } from '../shared/usuario.class';
+import { empleado } from '../shared/usuario.class';
 import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
@@ -13,6 +14,10 @@ export class AuthService {
   public alertW: AlertController;
   constructor(public afAuth: AngularFireAuth, public afStore: AngularFirestore, public fireStorage: AngularFireStorage) {
     afAuth.authState.subscribe((usuario) => (this.isLogged = usuario));
+  }
+
+  registrarEmpleadoEnFirebase(empleado: empleado) {
+    return this.afStore.collection('empleados').add(empleado);
   }
 
   // TRAER UN REGISTRO DE UNA COLECCIÓN USANDO UN UID

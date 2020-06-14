@@ -6,3 +6,11 @@ export class usuario{
     sexo: string;
     uid: string;
 }
+
+export class empleado{
+    nombre: string;
+    apellido: string;
+    correo: string;
+    fotoUrl: string;
+    objetivoDeVenta: string;
+}

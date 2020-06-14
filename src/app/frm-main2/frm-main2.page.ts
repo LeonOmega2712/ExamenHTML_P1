@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
-import { usuario } from '../shared/usuario.class';
+import { usuario, empleado } from '../shared/usuario.class';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-frm-main2',
@@ -12,10 +13,17 @@ import { usuario } from '../shared/usuario.class';
 export class FrmMain2Page implements OnInit {
   uid;
   u: usuario = new usuario();
+  imagenDelEmpleado;
+  imagenData;
 
-  coleccionDos = [];
+  options: CameraOptions = {
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  };
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService) {}
+  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService, private camera: Camera) {}
 
   ngOnInit() {
     // CONSEGUIR EL UID DEL USUARIO Y QUITARLE LAS COMILLAS DE JSON.STRINGIFY
@@ -30,37 +38,20 @@ export class FrmMain2Page implements OnInit {
       } else {
         this.u.nombre = '----------';
       }
-      this.cargarColeccion();
     });
   }
 
-  // TRAER TODOS LOS REGISTROS DE UNA COLECCIÓN, GUARDARLOS EN UN ARREGLO Y CARGARLO CON ngFor
-  cargarColeccion() {
-    this.fireSvc.getTodoCollection('coleccionDos').subscribe((data) => {
-      this.coleccionDos = data.map((e) => {
-        return {
-          uid: e.payload.doc.id,
-          nombre: e.payload.doc.data()['nombre'],
-          foto: e.payload.doc.data()['fotoLink'],
-          audio: e.payload.doc.data()['audioLink'],
-        };
-      });
-    });
+  registrarEmpleado() {
+
   }
 
-  mouseArriba(obj) {
-    this.coleccionDos.map(function(dato){
-      if(dato === obj){
-        dato.oculto = true;
-      }
-    });
+  abrirGaleria() {
+
   }
 
-  mouseAfuera(obj) {
-    this.coleccionDos.map(function(dato){
-      if(dato === obj){
-        dato.oculto = false;
-      }
+  abrirCamara() {
+    this.imagenData = this.camera.getPicture(this.options).then((imagenData) => {
+      this.imagenDelEmpleado = `data:image/jpeg;base64,${imagenData}`;
     });
   }
 
@@ -70,20 +61,4 @@ export class FrmMain2Page implements OnInit {
     localStorage.removeItem('uid');
     localStorage.removeItem('correo');
   }
-
-  reproducirSonido(s) {
-    let sonido = new Audio();
-    sonido.src = s.audio;
-    sonido.play();
-  }
-
-  abrirPerfil() {
-    this.router.navigateByUrl('/user-profile');
-  }
-
-  // BORRAR UN ELEMENTO DE FIREBASE
-  borrarRegistro(obj) {
-    this.fireSvc.borrarDeFirebase(obj, 'coleccionDos');
-  }
-
 }
