@@ -1,4 +1,20 @@
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Reporte
+      </ion-card-title>
+      <ion-card-subtitle>
+        Objetivos de venta
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="chart-container" style="position: relative; height: 70vh;">
+        <canvas #barCanvas></canvas> <!-- CONTENEDOR DEL CHART -->
+      </div>
+    </ion-card-content>
+  </ion-card>
+
   <!--FAB DE MENÚ-->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="light">
