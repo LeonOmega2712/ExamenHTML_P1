@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { empleado } from '../shared/usuario.class';
 import { Chart } from 'chart.js';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-frm-main3',
@@ -13,24 +14,41 @@ import { Chart } from 'chart.js';
 export class FrmMain3Page implements OnInit {
   @ViewChild('barCanvas', null) barCanvas: ElementRef;
   barChart: Chart;
-  constructor(private router: Router, private afAuth: AngularFireAuth, private fireSvc: AuthService) {}
-  
-  ngOnInit() {
+  listaDeEmpleados = [];
+  nombres = [];
+  objetivos = [];
+
+  constructor(
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private fireSvc: AuthService,
+    private alertCon: AlertController
+  ) {}
+
+  async ngOnInit() {
+    await this.cargarColeccion();
+
+  }
+
+  cargarGrafica(nombres, objetivos) {
+    if (this.barChart !== undefined) {
+      this.barChart.destroy();
+    }
     this.barChart = new Chart(this.barCanvas.nativeElement, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: nombres,
         datasets: [
           {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Objetivo de venta',
+            data: objetivos,
             backgroundColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: [
               'rgba(255,99,132,1)',
@@ -38,11 +56,19 @@ export class FrmMain3Page implements OnInit {
               'rgba(255, 206, 86, 1)',
               'rgba(75, 192, 192, 1)',
               'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 159, 64, 1)',
             ],
-            borderWidth: 1
-          }
-        ]
+            borderWidth: 1,
+            hoverBackgroundColor: [
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+              '#FF6384',
+              '#36A2EB',
+              '#FFCE56',
+            ],
+          },
+        ],
       },
       options: {
         legend: {
@@ -53,12 +79,34 @@ export class FrmMain3Page implements OnInit {
           yAxes: [
             {
               ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
-      }
+                beginAtZero: true,
+              },
+            },
+          ],
+        },
+      },
+    });
+  }
+
+  cargarColeccion() {
+    this.fireSvc.getTodoCollection('empleados').subscribe((data) => {
+      this.listaDeEmpleados = data.map((e) => {
+        return {
+          id: e.payload.doc.id,
+          nombre: e.payload.doc.data()['nombre'],
+          apellido: e.payload.doc.data()['apellido'],
+          correo: e.payload.doc.data()['correo'],
+          fotoUrl: e.payload.doc.data()['fotoUrl'],
+          objetivoDeVenta: e.payload.doc.data()['objetivoDeVenta'],
+        };
+      });
+      this.nombres = [];
+      this.objetivos = [];
+      this.listaDeEmpleados.forEach(empleado => {
+        this.nombres.push(empleado['nombre']);
+        this.objetivos.push(empleado['objetivoDeVenta']);
+      });
+      this.cargarGrafica(this.nombres, this.objetivos);
     });
   }
 
